@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.class_searchrescue.Application.SimController">
+<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.class_searchrescue.Application.SimController">
    <children>
-      <Label layoutX="272.0" layoutY="192.0" text="Simulation" />
+      <Text text="Simulation Area" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="568.0" stroke="BLACK" strokeType="INSIDE" width="799.0" />
    </children>
-</AnchorPane>
+   <prefHeight>600.0</prefHeight>
+   <prefWidth>800.0</prefWidth>
+</VBox>

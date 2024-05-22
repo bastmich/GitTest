@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.class_searchrescue.Application.SimController"
-      alignment="CENTER" spacing="10.0">
-      prefHeight ="800.0" prefWidth="200.0">
-  <children>
-    <Button text="Click Me" onAction="#handleButtonClick"/>
-  </children>
+<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.class_searchrescue.Application.Controller">
+    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffba1f" height="200.0" stroke="BLACK" strokeType="INSIDE" width="797.0" />
+        <Text text="Controller Area" />
+    </children>
+    <prefHeight>200.0</prefHeight>
+    <prefWidth>800.0</prefWidth>
 </VBox>
