@@ -1,4 +1,4 @@
-package org.example.class_searchrescue;
+package org.example.class_searchrescue.Application;
 
 import org.example.class_searchrescue.Object.Agent;
 import org.example.class_searchrescue.Object.Target;

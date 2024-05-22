@@ -1,4 +1,4 @@
-package org.example.class_searchrescue;
+package org.example.class_searchrescue.Application;
 
 public class Controller {
     protected void StartSim(){};
