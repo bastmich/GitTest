@@ -9,11 +9,13 @@ public class SimController {
     private ArrayList<Agent> agents;
     private Target target;
 
-    private float[][] Move(){
+    private float[][] Move() {
         return new float[0][];
-    };
+    }
 
-    private boolean Search()
-    {
+    ;
+
+    private boolean Search() {
         return false;
-    };
+    }
+}
