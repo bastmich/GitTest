@@ -7,6 +7,8 @@ public class Controller {
 
     protected void StopSim(){};
     protected void ResetSim(){};
-    protected void LoadConfig(){};
+    protected void LoadConfig(){
+
+    };
 
 }
