@@ -6,9 +6,10 @@ import org.example.class_searchrescue.Object.Target;
 import java.util.ArrayList;
 
 public class SimController {
-    private ArrayList<Agent> agents;
-    private Target target;
+    public static ArrayList<Agent> agents;
+    public static Target target;
 
+    public SimController(){};
     private float[][] Move() {
         return new float[0][];
     }

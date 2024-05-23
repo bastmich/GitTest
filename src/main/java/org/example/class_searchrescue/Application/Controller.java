@@ -1,6 +1,8 @@
 package org.example.class_searchrescue.Application;
 
 public class Controller {
+
+
     protected void StartSim(){};
 
     protected void StopSim(){};

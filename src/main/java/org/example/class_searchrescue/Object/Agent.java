@@ -49,4 +49,6 @@ public class Agent extends ObjectScheme {
     public boolean isCommunication(ObjectScheme object) {
         return false;
     }
+
+
 }
