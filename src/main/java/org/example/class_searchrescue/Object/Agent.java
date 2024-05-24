@@ -5,16 +5,23 @@ import org.example.class_searchrescue.Object.ObjectScheme;
 
 public class Agent extends ObjectScheme {
 
-    private float detectionRadius;
+    private float radiusDetection;
+    enum State{
+        SEARCHING,
+        GOTO,
+        FOUNDED,
+        STANDBY
+    }
+
+    private State state;
     public Agent(float positionX,float positionY, float detectionRadius, float communicationRadius,float velocity, Image image)
     {
         this.positionX = positionX;
         this.positionY= positionY;
-        this.detectionRadius = detectionRadius;
+        this.radiusDetection = detectionRadius;
         this.radiusCommunication = communicationRadius;
         this.velocityMagnitude = velocity;
         this.image=image;
-
     }
     public void changeImage(Image image) {
 
@@ -49,4 +56,12 @@ public class Agent extends ObjectScheme {
     public boolean isCommunication(ObjectScheme object) {
         return false;
     }
+
+    private float[] randomWay(){
+        return new float[0];
+    };
+    private float[] goToWay(){
+        return new float[0];
+    };
+
 }

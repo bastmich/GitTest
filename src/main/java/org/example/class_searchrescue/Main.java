@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 //Test
-//Test flo
 public class Main extends Application {
 
     @Override

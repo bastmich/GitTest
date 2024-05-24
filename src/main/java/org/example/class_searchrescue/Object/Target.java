@@ -4,13 +4,10 @@ import javafx.scene.image.Image;
 
 public class Target extends ObjectScheme{
 
-    private int Founded;
+    private int founded;
 
-    public Target(float positionX,float positionY,float radius, Image image)
+    public Target(Image image)
     {
-        this.positionX = positionX;
-        this.positionY=positionY;
-        this.radiusCommunication=radius;
         this.image=image;
     }
 
@@ -48,6 +45,11 @@ public class Target extends ObjectScheme{
 
     public int getFounded()
     {
-        return this.Founded;
+        return this.founded;
+    }
+
+    public void newFounded()
+    {
+        this.founded +=1;
     }
 }
