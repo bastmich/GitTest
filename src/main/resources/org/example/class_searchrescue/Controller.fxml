@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.class_searchrescue.Application.Controller">
     <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffba1f" height="200.0" stroke="BLACK" strokeType="INSIDE" width="797.0" />
-        <Text text="Controller Area" />
+        <Text text="Simulation Controls" translateX="-300.0" translateY="-55.0" wrappingWidth="155.361328125" />
+      <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#startSim" prefHeight="15.0" prefWidth="43.0" text="Start" textFill="#0b0b0b" />
+      <Button fx:id="stopSim" mnemonicParsing="false" text="Stop" />
     </children>
     <prefHeight>200.0</prefHeight>
     <prefWidth>800.0</prefWidth>

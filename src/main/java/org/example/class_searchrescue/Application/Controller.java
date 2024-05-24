@@ -1,15 +1,17 @@
 package org.example.class_searchrescue.Application;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.example.class_searchrescue.Object.Agent;
 
 import java.util.ArrayList;
 
 public class Controller {
 
-    protected static boolean running;
-    protected static boolean reset;
+    protected static boolean running = false;
+    protected static boolean reset = false;
 
     private Image agentMan;
     private Image agentHelicopter;
@@ -23,9 +25,13 @@ public class Controller {
 
 
     @FXML
-    private void startSim(){};
+    private void startSim(){
+        running = true;
+    };
     @FXML
-    private void stopSim(){};
+    private void stopSim(){
+        running = false;
+    };
     @FXML
     private void resetSim(){};
     @FXML
@@ -39,4 +45,5 @@ public class Controller {
     private void changeImageDrone(){};
 
     private void initialisation(){}
+
 }

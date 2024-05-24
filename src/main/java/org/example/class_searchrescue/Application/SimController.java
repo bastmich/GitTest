@@ -2,6 +2,7 @@ package org.example.class_searchrescue.Application;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import org.example.class_searchrescue.Object.Agent;
 import org.example.class_searchrescue.Object.Target;
@@ -23,6 +24,10 @@ public class SimController {
     protected void Run(){
         if (Controller.running)
         {
+
+
+
+
 
         }
     }
