@@ -3,9 +3,12 @@ package org.example.class_searchrescue.Object;
 import javafx.scene.image.Image;
 import org.example.class_searchrescue.Object.ObjectScheme;
 
+import java.util.ArrayList;
+
 public class Agent extends ObjectScheme {
 
     private float radiusDetection;
+    private float[] goToPosition = new float[2];
     enum State{
         SEARCHING,
         GOTO,
@@ -59,9 +62,28 @@ public class Agent extends ObjectScheme {
 
     private float[] randomWay(){
         return new float[0];
-    };
+    }
     private float[] goToWay(){
         return new float[0];
-    };
+    }
 
+    private float calculDistance(float position1X, float position1Y,float position2X, float position2Y)
+    {
+        return position1X;
+    }
+
+    public void checkTarget(Target target)
+    {
+
+    }
+
+    public void communication(ArrayList<Agent> agents)
+    {
+
+    }
+
+    public void setGoToPosition(float[] position)
+    {
+
+    }
 }

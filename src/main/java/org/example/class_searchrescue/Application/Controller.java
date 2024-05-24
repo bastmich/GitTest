@@ -38,5 +38,5 @@ public class Controller {
     @FXML
     private void changeImageDrone(){};
 
-
+    private void initialisation(){}
 }
