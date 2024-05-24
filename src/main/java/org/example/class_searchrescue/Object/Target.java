@@ -13,29 +13,36 @@ public class Target extends ObjectScheme{
 
     @Override
     public void changeImage(Image image) {
+        this.image = image;
     }
 
     @Override
     public void changePosition(float positionX, float positionY) {
+        this.positionX = positionX;
+        this.positionY = positionY;
     }
 
     @Override
     public void changeRadiusCommunication(float radius) {
+        this.radiusCommunication=radius;
     }
 
     @Override
     public float[] getPosition() {
-        return new float[0];
+        float[] returnArray = new float[2];
+        returnArray[0] = this.positionX;
+        returnArray[1] = this.positionY;
+        return returnArray;
     }
 
     @Override
     public float radiusCommunication() {
-        return 0;
+        return this.radiusCommunication;
     }
 
     @Override
     public Image getImage() {
-        return null;
+        return this.image;
     }
 
     @Override

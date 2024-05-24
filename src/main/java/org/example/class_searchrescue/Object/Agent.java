@@ -27,37 +27,55 @@ public class Agent extends ObjectScheme {
         this.image=image;
     }
     public void changeImage(Image image) {
-
+        this.image = image;
     }
 
     @Override
     public void changePosition(float positionX, float positionY) {
-
+        this.positionX = positionX;
+        this.positionY = positionY;
     }
 
     @Override
     public void changeRadiusCommunication(float radius) {
-
+        this.radiusCommunication=radius;
     }
 
     @Override
     public float[] getPosition() {
-        return new float[0];
+        float[] returnArray = new float[2];
+        returnArray[0] = this.positionX;
+        returnArray[1] = this.positionY;
+        return returnArray;
     }
 
     @Override
     public float radiusCommunication() {
-        return 0;
+        return this.radiusCommunication;
+    }
+    public float getRadiusDetection(){
+        return this.radiusDetection;
+    }
+
+    public float setRadiusDetection(){
+        return this.radiusDetection;
     }
 
     @Override
     public Image getImage() {
-        return null;
+        return this.image;
     }
 
     @Override
     public boolean isCommunication(ObjectScheme object) {
-        return false;
+        if(calculDistance(this.positionX,this.positionY,object.positionX,object.positionY)<=this.radiusCommunication)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private float[] randomWay(){
@@ -69,7 +87,11 @@ public class Agent extends ObjectScheme {
 
     private float calculDistance(float position1X, float position1Y,float position2X, float position2Y)
     {
-        return position1X;
+        float deltaX;
+        float deltaY;
+        deltaX = Math.abs(position1X-position2X);
+        deltaY = Math.abs(position1Y-position2Y);
+        return (float) Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaY,2));
     }
 
     public void checkTarget(Target target)
