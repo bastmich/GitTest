@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.fxml.FXMLLoader?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.class_searchrescue.Application.Application"
-      spacing="10.0"
-      alignment="TOP_CENTER"
-      prefHeight="800.0" prefWidth="800.0">
+<VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="800.0" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.class_searchrescue.App.SimController">
+    <!-- StackPane to contain the canvas and rectangle -->
+    <StackPane>
+        <!-- Rectangle surrounding the canvas -->
+        <Rectangle width="800.0" height="600.0" fill="transparent" stroke="black" strokeWidth="2" />
+        <!-- Canvas at the top -->
+        <Canvas fx:id="canvas" width="800.0" height="600.0" />
+    </StackPane>
 
-    <!-- Simulation window at the top -->
-    <fx:include source="Simulation.fxml"/>
+    <!-- Spacer -->
+    <Region prefHeight="5.0" />
 
-    <!-- Controller window at the bottom -->
-    <fx:include source="Controller.fxml"/>
-
+    <!-- StackPane to contain the controller and rectangle -->
+    <StackPane>
+        <!-- Rectangle surrounding the controller -->
+        <Rectangle width="800.0" height="200.0" fill="transparent" stroke="black" strokeWidth="2" />
+        <!-- Controller -->
+        <fx:include source="Controller.fxml" />
+    </StackPane>
 </VBox>

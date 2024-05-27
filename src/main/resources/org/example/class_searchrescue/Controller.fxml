@@ -4,11 +4,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.class_searchrescue.Application.Controller">
+<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.class_searchrescue.App.Controller">
     <children>
         <Text text="Simulation Controls" translateX="-300.0" translateY="-55.0" wrappingWidth="155.361328125" />
+      <Label fx:id="status" />
       <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#startSim" prefHeight="15.0" prefWidth="43.0" text="Start" textFill="#0b0b0b" />
-      <Button fx:id="stopSim" mnemonicParsing="false" text="Stop" />
+      <Button mnemonicParsing="false" onAction="#stopSim" text="Stop" />
     </children>
     <prefHeight>200.0</prefHeight>
     <prefWidth>800.0</prefWidth>

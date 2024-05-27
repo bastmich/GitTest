@@ -7,6 +7,6 @@ module org.example.class_searchrescue {
     exports org.example.class_searchrescue;
     exports org.example.class_searchrescue.Object;
     opens org.example.class_searchrescue.Object to javafx.fxml;
-    exports org.example.class_searchrescue.Application;
-    opens org.example.class_searchrescue.Application to javafx.fxml;
+    exports org.example.class_searchrescue.App;
+    opens org.example.class_searchrescue.App to javafx.fxml;
 }
