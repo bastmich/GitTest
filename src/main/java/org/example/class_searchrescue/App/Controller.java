@@ -20,6 +20,7 @@ public class Controller {
         this.app = app;
     }
     public Controller(){}
+
     @FXML Label targetPosition;
     @FXML Label TargetPosition;
     @FXML Label agentSpeed;
@@ -41,6 +42,7 @@ public class Controller {
         status.setText("");
         app.simController.stopSim();
     };
+
     @FXML
     private void resetSim(){};
     @FXML

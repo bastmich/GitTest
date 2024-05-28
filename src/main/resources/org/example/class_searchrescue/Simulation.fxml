@@ -3,12 +3,10 @@
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.class_searchrescue.App.SimController">
+<VBox alignment="CENTER" maxHeight="800.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.class_searchrescue.App.SimController">
    <children>
       <Canvas fx:id="canvas" height="454.0" width="703.0" />
-      <Text text="Simulation Area" />
       <Label fx:id="status" />
    </children>
    <prefHeight>600.0</prefHeight>

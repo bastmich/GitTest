@@ -20,6 +20,9 @@ public class Application extends javafx.application.Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setResizable(false);
+        primaryStage.setMaxHeight(800);
+        primaryStage.setMaxWidth(800);
     }
 
     public static void main(String[] args) {
