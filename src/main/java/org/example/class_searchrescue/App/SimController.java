@@ -25,7 +25,7 @@ public class SimController {
 
     private AnimationTimer animationTimer;
 
-    private Image targetImage = new Image("earth.png");
+    private Image targetImage = new Image("target.png");
     protected static ArrayList<Agent> agents = new ArrayList<>(5);
     private Target target = new Target(targetImage);
 

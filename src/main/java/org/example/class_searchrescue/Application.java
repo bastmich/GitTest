@@ -16,11 +16,6 @@ public class Application extends javafx.application.Application {
         Parent root = loader.load();
 
         simController = loader.getController();
-        
-
-
-        // Vous pouvez maintenant accéder à simController et utiliser ses méthodes ou champs
-        // par exemple, simController.canvas etc.
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
