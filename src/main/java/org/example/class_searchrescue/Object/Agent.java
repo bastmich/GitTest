@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import org.example.class_searchrescue.Object.ObjectScheme;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Agent extends ObjectScheme {
 
@@ -17,14 +18,14 @@ public class Agent extends ObjectScheme {
     }
 
     private State state;
-    public Agent(float positionX,float positionY, float detectionRadius, float communicationRadius,float velocity, Image image)
+    public Agent(float positionX,float positionY, float detectionRadius, float communicationRadius,float velocity)
     {
         this.positionX = positionX;
         this.positionY= positionY;
         this.radiusDetection = detectionRadius;
         this.radiusCommunication = communicationRadius;
         this.velocityMagnitude = velocity;
-        this.image=image;
+
     }
     public void changeImage(Image image) {
         this.image = image;
@@ -34,6 +35,7 @@ public class Agent extends ObjectScheme {
     public void changePosition(float positionX, float positionY) {
         this.positionX = positionX;
         this.positionY = positionY;
+
     }
 
     @Override
@@ -78,8 +80,16 @@ public class Agent extends ObjectScheme {
         }
     }
 
+    public float[] updatePosition()
+    {
+        return randomWay();
+    }
     private float[] randomWay(){
-        return new float[0];
+        Random random = new Random();
+        float[] position = new float[2];
+        position[0] = random.nextInt(801);
+        position[1] = random.nextInt(601);
+        return position;
     }
     private float[] goToWay(){
         return new float[0];

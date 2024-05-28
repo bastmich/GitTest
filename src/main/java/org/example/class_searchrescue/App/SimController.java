@@ -26,7 +26,8 @@ public class SimController {
     private AnimationTimer animationTimer;
 
     private Image targetImage = new Image("target.png");
-    protected static ArrayList<Agent> agents = new ArrayList<>(5);
+    protected static ArrayList<Agent> agents = new ArrayList<>();
+
     private Target target = new Target(targetImage);
 
     public SimController() {
@@ -37,9 +38,11 @@ public class SimController {
     private void initialize() {
         // Call initializeAnimationTimer() to ensure canvas is initialized before setting up the animation timer
         initializeAnimationTimer();
+        initializeAgent();
         System.out.println("initialized");
         System.out.println(animationTimer);
         System.out.println(canvas);
+
     }
 
     private void initializeAnimationTimer() {
@@ -51,18 +54,32 @@ public class SimController {
         }
     }
 
+    private void initializeAgent(){
+        for(int i=0;i<5;i++)
+        {
+            agents.add(new Agent(0,0,0,0,0));
+        }
+    }
+
     private void setupAnimationTimer() {
         animationTimer = new AnimationTimer() {
             final long startNanoTime = System.nanoTime();
             @Override
             public void handle(long now) {
+
                 GraphicsContext gc = canvas.getGraphicsContext2D();
                 double t = (now - startNanoTime) / 1000000000.0;
-                double x = 232 + 128 * Math.cos(t);
-                double y = 232 + 128 * Math.sin(t);
-                // background image clears canvas
+
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-                gc.drawImage(target.getImage(), x, y);
+                gc.drawImage(target.getImage(), 0, 0);
+
+                for (int i = 0;i< agents.size();i++)
+                {
+                    float[] newPositions = agents.get(i).updatePosition();
+                    agents.get(i).changePosition(newPositions[0],newPositions[1]);
+                    gc.drawImage(agents.get(i).getImage(),newPositions[0],newPositions[1]);
+
+                }
             }
         };
         System.out.println("init");

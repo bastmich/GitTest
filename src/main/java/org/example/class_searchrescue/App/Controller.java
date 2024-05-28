@@ -10,9 +10,9 @@ public class Controller {
    public boolean running = false;
     protected static boolean reset = false;
 
-    private Image agentMan;
-    private Image agentHelicopter;
-    private Image agentDrone;
+    private Image agentMan = new Image("human.png");
+    private Image agentHelicopter = new Image("helicopter.png");
+    private Image agentDrone = new Image("drone.png");
 
     private Application app ;
 
@@ -26,20 +26,18 @@ public class Controller {
     @FXML Label agentSpeed;
     @FXML Label agentDetetctionRange;
     @FXML Label agentCommunicationRange;
-    @FXML  Label status;
+
 
 
     @FXML
     private void startSim(){
         running = true;
-        status.setText("Running...");
         app.simController.startSim();
 
     };
     @FXML
     private void stopSim(){
         running = false;
-        status.setText("");
         app.simController.stopSim();
     };
 
@@ -49,11 +47,28 @@ public class Controller {
     private void loadConfig(){};
 
     @FXML
-    private void changeImageMan(){};
+    private void changeImageMan(){
+
+     for(int i=0;i<app.simController.agents.size();i++)
+     {
+       app.simController.agents.get(i).changeImage(agentMan);
+     }
+     System.out.println("man");
+    };
     @FXML
-    private void changeImageHelicopter(){};
+    private void changeImageHelicopter(){
+     for(int i=0;i<app.simController.agents.size();i++)
+     {
+      app.simController.agents.get(i).changeImage(agentHelicopter);
+     }
+    };
     @FXML
-    private void changeImageDrone(){};
+    private void changeImageDrone(){
+     for(int i=0;i<app.simController.agents.size();i++)
+     {
+      app.simController.agents.get(i).changeImage(agentDrone);
+     }
+    };
 
     private void initialisation(){}
 
