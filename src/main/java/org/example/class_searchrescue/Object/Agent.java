@@ -149,7 +149,7 @@ public class Agent extends ObjectScheme {
         }
         return position;
     }
-
+//
     private float checkWallCollision(float angle)
     {
         if (this.positionY+this.imageSize > this.maxWindowY ||this.positionX+this.imageSize > this.maxWindowX||this.positionY <0||this.positionX <0)
