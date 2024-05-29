@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" maxHeight="800.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.class_searchrescue.App.SimController">
+<VBox alignment="CENTER" maxHeight="800.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" spacing="0.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.class_searchrescue.App.SimController">
    <children>
       <Canvas fx:id="canvas" height="454.0" width="703.0" />
       <Label fx:id="status" />

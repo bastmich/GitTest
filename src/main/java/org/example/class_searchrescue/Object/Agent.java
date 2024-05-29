@@ -87,8 +87,8 @@ public class Agent extends ObjectScheme {
     private float[] randomWay(){
         Random random = new Random();
         float[] position = new float[2];
-        position[0] = random.nextInt(801);
-        position[1] = random.nextInt(601);
+        position[0] = random.nextInt(701);
+        position[1] = random.nextInt(501);
         return position;
     }
     private float[] goToWay(){
