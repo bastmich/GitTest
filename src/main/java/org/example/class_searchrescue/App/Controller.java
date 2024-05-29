@@ -3,6 +3,7 @@ package org.example.class_searchrescue.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Rectangle;
 import org.example.class_searchrescue.Application;
 
 public class Controller {
@@ -26,7 +27,18 @@ public class Controller {
     @FXML Label agentSpeed;
     @FXML Label agentDetetctionRange;
     @FXML Label agentCommunicationRange;
+    @FXML Rectangle SquareMan;
+    @FXML Rectangle SquareHelicopter;
+    @FXML Rectangle SquareDrone;
 
+
+ @FXML
+ private void initialize() {
+  SquareMan.setVisible(false);
+  SquareHelicopter.setVisible(false);
+  SquareDrone.setVisible(false);
+
+ }
 
 
     @FXML
@@ -54,6 +66,12 @@ public class Controller {
        app.simController.agents.get(i).changeImage(agentMan);
      }
      System.out.println("man");
+
+     //Visibility management
+     SquareMan.setVisible(true);
+     SquareHelicopter.setVisible(false);
+     SquareDrone.setVisible(false);
+
     };
     @FXML
     private void changeImageHelicopter(){
@@ -61,6 +79,10 @@ public class Controller {
      {
       app.simController.agents.get(i).changeImage(agentHelicopter);
      }
+     //Visibility management
+     SquareMan.setVisible(false);
+     SquareHelicopter.setVisible(true);
+     SquareDrone.setVisible(false);
     };
     @FXML
     private void changeImageDrone(){
@@ -68,7 +90,15 @@ public class Controller {
      {
       app.simController.agents.get(i).changeImage(agentDrone);
      }
+
+     //Visibility management
+     SquareMan.setVisible(false);
+     SquareHelicopter.setVisible(false);
+     SquareDrone.setVisible(true);
     };
+
+
+
 
     private void initialisation(){}
 

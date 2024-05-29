@@ -22,7 +22,7 @@ public class Application extends javafx.application.Application {
         primaryStage.show();
         primaryStage.setResizable(false);
         primaryStage.setMaxHeight(800);
-        primaryStage.setMaxWidth(800);
+        primaryStage.setMaxWidth(1300);
     }
 
     public static void main(String[] args) {
