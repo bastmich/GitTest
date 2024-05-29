@@ -57,7 +57,7 @@ public class SimController {
     private void initializeAgent(){
         for(int i=0;i<5;i++)
         {
-            agents.add(new Agent(0,0,0,0,0));
+            agents.add(new Agent(0,0,0));
         }
     }
 

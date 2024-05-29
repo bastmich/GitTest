@@ -18,10 +18,15 @@ public class Agent extends ObjectScheme {
     }
 
     private State state;
-    public Agent(float positionX,float positionY, float detectionRadius, float communicationRadius,float velocity)
+    private int imageSize = 100;
+
+    private float direction ;
+    public Agent(float detectionRadius, float communicationRadius,float velocity)
     {
-        this.positionX = positionX;
-        this.positionY= positionY;
+        Random random = new Random();
+        this.positionX = random.nextInt(800-imageSize);
+        this.positionY= random.nextInt(600-imageSize);
+        this.direction = random.nextInt(360);
         this.radiusDetection = detectionRadius;
         this.radiusCommunication = communicationRadius;
         this.velocityMagnitude = velocity;
@@ -85,10 +90,10 @@ public class Agent extends ObjectScheme {
         return randomWay();
     }
     private float[] randomWay(){
-        Random random = new Random();
+
         float[] position = new float[2];
-        position[0] = random.nextInt(701);
-        position[1] = random.nextInt(501);
+        position[0] = 4;
+        position[1] = 4;
         return position;
     }
     private float[] goToWay(){
