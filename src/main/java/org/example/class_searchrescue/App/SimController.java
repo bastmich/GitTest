@@ -65,6 +65,7 @@ public class SimController {
     }
 
     private void setupAnimationTimer() {
+        System.out.println("run");
         animationTimer = new AnimationTimer() {
             final long startNanoTime = System.nanoTime();
             @Override

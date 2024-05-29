@@ -18,8 +18,7 @@
             <Rectangle fx:id="SquareMan" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="56.0" layoutX="15.0" layoutY="166.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
             <Rectangle fx:id="SquareHelicopter" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="56.0" layoutX="80.0" layoutY="166.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
             <Rectangle fx:id="SquareDrone" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="56.0" layoutX="145.0" layoutY="166.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
-            <Button layoutX="85.0" layoutY="76.0" mnemonicParsing="false" onAction="#stopSim" prefHeight="49.0" prefWidth="49.0" />
-            <Button contentDisplay="TOP" layoutX="17.0" layoutY="76.0" mnemonicParsing="false" onAction="#startSim" prefHeight="49.0" prefWidth="49.0" textFill="#0b0b0b" />
+            <Button layoutX="85.0" layoutY="76.0" mnemonicParsing="false" onAction="#stopSim" opacity="0.0" prefHeight="49.0" prefWidth="49.0" />
               <Text layoutX="15.0" layoutY="35.0" text="Simulation controls" wrappingWidth="241.36131286621094">
                <font>
                   <Font size="24.0" />
@@ -69,6 +68,7 @@
                   <Image url="@../../../6532052.png" />
                </image>
             </ImageView>
+            <Button contentDisplay="TOP" layoutX="17.0" layoutY="76.0" mnemonicParsing="false" onAction="#startSim" opacity="0.0" prefHeight="49.0" prefWidth="49.0" textFill="#0b0b0b" />
          </children>
       </Pane>
     </children>
