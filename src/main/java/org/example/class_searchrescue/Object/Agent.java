@@ -20,16 +20,21 @@ public class Agent extends ObjectScheme {
     private State state;
     private int imageSize = 100;
 
-    private float direction ;
-    public Agent(float detectionRadius, float communicationRadius,float velocity)
+    private float maxWindowX=800;
+    private float maxWindowY=600;
+
+    private float directionAngle ;
+    private float incrementStep =1;
+    public Agent(float detectionRadius, float communicationRadius,float velocity,Image image)
     {
         Random random = new Random();
         this.positionX = random.nextInt(800-imageSize);
         this.positionY= random.nextInt(600-imageSize);
-        this.direction = random.nextInt(360);
+        this.directionAngle = random.nextInt(360);
         this.radiusDetection = detectionRadius;
         this.radiusCommunication = communicationRadius;
         this.velocityMagnitude = velocity;
+        this.image = image;
 
     }
     public void changeImage(Image image) {
@@ -92,9 +97,130 @@ public class Agent extends ObjectScheme {
     private float[] randomWay(){
 
         float[] position = new float[2];
-        position[0] = 4;
-        position[1] = 4;
+        float distanceToDo = this.incrementStep*this.velocityMagnitude;
+        float deltaX;
+        float deltaY;
+        System.out.print("X : "+this.positionX);
+        System.out.println("   Y : "+this.positionY);
+        this.directionAngle= checkWallCollision(this.directionAngle);
+        //First cadran
+        if(this.directionAngle >= 0 && this.directionAngle < 90)
+        {
+            //Calcul of deltaX and deltaY
+            deltaX = (float) (Math.cos(Math.toRadians(this.directionAngle))*distanceToDo);
+            deltaY = (float) (Math.sin(Math.toRadians(this.directionAngle))*distanceToDo);
+
+            //Update position
+            position[0]= this.positionX+deltaX;
+            position[1]= this.positionY-deltaY;
+        }
+        //Second cadran
+        else if(this.directionAngle >= 90 && this.directionAngle < 180)
+        {
+            //Calcul of deltaX and deltaY
+            deltaX = (float) (Math.cos(Math.toRadians(this.directionAngle-90))*distanceToDo);
+            deltaY = (float) (Math.sin(Math.toRadians(this.directionAngle-90))*distanceToDo);
+
+            //Update position
+            position[0]= this.positionX-deltaX;
+            position[1]= this.positionY-deltaY;
+        }
+        //Third cadran
+        else if(this.directionAngle >= 180 && this.directionAngle < 270)
+        {
+            //Calcul of deltaX and deltaY
+            deltaX = (float) (Math.cos(Math.toRadians(this.directionAngle-180))*distanceToDo);
+            deltaY = (float) (Math.sin(Math.toRadians(this.directionAngle-180))*distanceToDo);
+
+            //Update position
+            position[0]= this.positionX-deltaX;
+            position[1]= this.positionY+deltaY;
+        }
+        //Fourth cadran
+        else if(this.directionAngle >= 270 && this.directionAngle < 360)
+        {
+            //Calcul of deltaX and deltaY
+            deltaX = (float) (Math.cos(Math.toRadians(this.directionAngle-270))*distanceToDo);
+            deltaY = (float) (Math.sin(Math.toRadians(this.directionAngle-270))*distanceToDo);
+
+            //Update position
+            position[0]= this.positionX+deltaX;
+            position[1]= this.positionY+deltaY;
+        }
         return position;
+    }
+
+    private float checkWallCollision(float angle)
+    {
+        if (this.positionY+this.imageSize > this.maxWindowY ||this.positionX+this.imageSize > this.maxWindowX||this.positionY <0||this.positionX <0)
+        {
+
+            //First cadran
+            if(angle >= 0 && angle < 90)
+            {
+                //Collision X
+
+                if ((this.positionX+this.imageSize)>this.maxWindowX)
+                {
+                    System.out.println("Depasse X");
+                    return 180-angle;
+                }
+                //Collision Y
+                if (this.positionY<0)
+                {
+                    System.out.println("Depasse Y");
+                    return 360-angle;
+
+                }
+            }
+            //Second cadran
+            else if(angle >= 90 && angle < 180)
+            {
+                //Collision X
+                if (this.positionX<0)
+                {
+                    return 180-angle;
+                }
+                //Collision Y
+                if (this.positionY<0)
+                {
+                    return 360-angle;
+                }
+            }
+            //Third cadran
+            else if(angle >= 180 && angle < 270)
+            {
+                //Collision X
+                if (this.positionX<0)
+                {
+                    return angle+90;
+                }
+                //Collision Y
+                if (this.positionY+this.imageSize>this.maxWindowY)
+                {
+                    return 360-angle;
+                }
+            }
+            //Fourth cadran
+            else if(angle >= 270 && angle < 360)
+            {
+                //Collision X
+                if (this.positionX+this.imageSize>maxWindowX)
+                {
+                    return angle-90;
+                }
+                //Collision Y
+                if (this.positionY+this.imageSize>maxWindowY)
+                {
+                    return 360-angle;
+                }
+            }
+        }
+        else
+        {
+            return angle;
+        }
+        return angle;
     }
     private float[] goToWay(){
         return new float[0];

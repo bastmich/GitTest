@@ -43,6 +43,7 @@ public class Controller {
 
     @FXML
     private void startSim(){
+        System.out.println("run");
         running = true;
         app.simController.startSim();
 

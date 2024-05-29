@@ -10,8 +10,6 @@
     <StackPane>
         <!-- Rectangle surrounding the canvas -->
         <Rectangle fill="transparent" height="800.0" stroke="black" strokeWidth="2" width="800.0" StackPane.alignment="TOP_LEFT" />
-        <!-- Canvas at the top -->
-        <Canvas fx:id="canvas" height="800.0" width="800.0" StackPane.alignment="TOP_LEFT" />
 
           <!-- Spacer -->
 
@@ -28,5 +26,7 @@
             <Image url="@../../../back1.jpg" />
          </image>
       </ImageView>
+        <!-- Canvas at the top -->
+        <Canvas fx:id="canvas" height="800.0" width="800.0" StackPane.alignment="TOP_LEFT" />
     </StackPane>
 </VBox>

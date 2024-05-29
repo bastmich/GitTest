@@ -23,12 +23,16 @@ public class SimController {
     @FXML
     private Label status;
 
+    private int numberOfAgents =5;
+
     private AnimationTimer animationTimer;
 
     private Image targetImage = new Image("target.png");
+    private Image agentImage = new Image("human.png");
     protected static ArrayList<Agent> agents = new ArrayList<>();
 
     private Target target = new Target(targetImage);
+
 
     public SimController() {
 
@@ -36,9 +40,7 @@ public class SimController {
 
     @FXML
     private void initialize() {
-        // Call initializeAnimationTimer() to ensure canvas is initialized before setting up the animation timer
         initializeAnimationTimer();
-        initializeAgent();
         System.out.println("initialized");
         System.out.println(animationTimer);
         System.out.println(canvas);
@@ -55,13 +57,15 @@ public class SimController {
     }
 
     private void initializeAgent(){
-        for(int i=0;i<5;i++)
+        agents.clear();
+        for(int i=0;i<this.numberOfAgents;i++)
         {
-            agents.add(new Agent(0,0,0));
+            agents.add(new Agent(0,0,1,agentImage));
         }
     }
 
     private void setupAnimationTimer() {
+        System.out.println("run");
         animationTimer = new AnimationTimer() {
             final long startNanoTime = System.nanoTime();
             @Override
@@ -88,8 +92,9 @@ public class SimController {
 
     public void startSim() {
         System.out.println("try");
-
+        initializeAgent();
         initializeAnimationTimer();
+
         System.out.println(animationTimer);
         if (animationTimer != null) {
             System.out.println("Simulation started");
