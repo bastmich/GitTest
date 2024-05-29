@@ -60,7 +60,7 @@ public class SimController {
         agents.clear();
         for(int i=0;i<this.numberOfAgents;i++)
         {
-            agents.add(new Agent(0,0,1,agentImage));
+            agents.add(new Agent(0,0,1,agentImage,(float)canvas.getWidth(),(float)canvas.getHeight()));
         }
     }
 
@@ -75,7 +75,7 @@ public class SimController {
                 double t = (now - startNanoTime) / 1000000000.0;
 
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-                gc.drawImage(target.getImage(), 0, 0);
+                gc.drawImage(target.getImage(), 400, 400);
 
                 for (int i = 0;i< agents.size();i++)
                 {

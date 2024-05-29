@@ -1,6 +1,7 @@
 package org.example.class_searchrescue.Object;
 
 import javafx.scene.image.Image;
+import org.example.class_searchrescue.App.SimController;
 import org.example.class_searchrescue.Object.ObjectScheme;
 
 import java.util.ArrayList;
@@ -20,12 +21,12 @@ public class Agent extends ObjectScheme {
     private State state;
     private int imageSize = 100;
 
-    private float maxWindowX=800;
-    private float maxWindowY=600;
+    private float maxWindowX;
+    private float maxWindowY;
 
     private float directionAngle ;
     private float incrementStep =1;
-    public Agent(float detectionRadius, float communicationRadius,float velocity,Image image)
+    public Agent(float detectionRadius, float communicationRadius,float velocity,Image image,float maxWindowX, float maxWindowY)
     {
         Random random = new Random();
         this.positionX = random.nextInt(800-imageSize);
@@ -35,6 +36,8 @@ public class Agent extends ObjectScheme {
         this.radiusCommunication = communicationRadius;
         this.velocityMagnitude = velocity;
         this.image = image;
+        this.maxWindowX = maxWindowX;
+        this.maxWindowY = maxWindowY;
 
     }
     public void changeImage(Image image) {
