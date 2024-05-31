@@ -34,6 +34,14 @@ public class Target extends ObjectScheme{
         returnArray[1] = this.positionY;
         return returnArray;
     }
+    public float getPositionX()
+    {
+        return this.positionX;
+    }
+    public float getPositionY()
+    {
+        return this.positionY;
+    }
 
     @Override
     public float radiusCommunication() {
