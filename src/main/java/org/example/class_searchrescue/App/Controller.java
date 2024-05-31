@@ -43,15 +43,18 @@ public class Controller {
 
     @FXML
     private void startSim(){
-        System.out.println("run");
-        running = true;
-        app.simController.startSim();
-
+     if (!running) {
+         System.out.println("run");
+         running = true;
+         app.simController.startSim();
+     }
     };
     @FXML
     private void stopSim(){
-        running = false;
-        app.simController.stopSim();
+        if (running) {
+            running = false;
+            app.simController.stopSim();
+        }
     };
 
     @FXML
