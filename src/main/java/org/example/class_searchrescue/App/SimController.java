@@ -62,7 +62,7 @@ public class SimController {
         agents.clear();
         for(int i=0;i<this.numberOfAgents;i++)
         {
-            agents.add(new Agent(100,200,1,agentImage,(float)canvas.getWidth(),(float)canvas.getHeight()));
+            agents.add(new Agent(100,200,10,agentImage,(float)canvas.getWidth(),(float)canvas.getHeight()));
         }
     }
 
@@ -120,10 +120,20 @@ public class SimController {
 
         }
     }
+    public void restartSim(){
+        if (animationTimer != null) {
+            animationTimer.start();
+        }
+    }
 
     public void stopSim() {
         if (animationTimer != null) {
             animationTimer.stop();
         }
+    }
+
+    public void resetSim(){
+        stopSim();
+        startSim();
     }
 }

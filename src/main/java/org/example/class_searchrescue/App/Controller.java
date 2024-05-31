@@ -14,7 +14,8 @@ import javax.swing.JFileChooser;
 
 public class Controller {
 
-   public boolean running = false;
+   private boolean running = false;
+   private boolean pause=false;
     protected static boolean reset = false;
 
     private Image agentMan = new Image("human.png");
@@ -51,8 +52,14 @@ public class Controller {
     private void startSim(){
      if (!running) {
          System.out.println("run");
-         running = true;
+
          app.simController.startSim();
+         running = true;
+     }
+     else
+     {
+         app.simController.restartSim();
+         running = true;
      }
 
      //Visibility management
@@ -65,13 +72,16 @@ public class Controller {
     @FXML
     private void stopSim(){
         if (running) {
-            running = false;
+
             app.simController.stopSim();
+            running = false;
         }
     };
 
     @FXML
-    private void resetSim(){};
+    private void resetSim(){
+        app.simController.resetSim();
+    };
     @FXML
     private void loadConfig(){
 

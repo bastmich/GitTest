@@ -167,7 +167,7 @@ public class Agent extends ObjectScheme {
             position[1]= this.positionY+deltaY;
         }
         //Fourth cadran
-        else if(this.directionAngle >= 270 && this.directionAngle < 360)
+        else if(this.directionAngle >= 270 && this.directionAngle <= 360)
         {
             //Calcul of deltaX and deltaY
             deltaX = (float) (Math.cos(Math.toRadians(this.directionAngle-270))*distanceToDo);
@@ -259,9 +259,35 @@ public class Agent extends ObjectScheme {
         System.out.println(this.positionY+" ");
 
         angle = (float) Math.atan((this.goToPosition[0]-this.positionX)/(this.goToPosition[1]-this.positionY));
-        System.out.println(Math.toDegrees(angle));
-        angle = (float) (Math.PI-angle);
-        return (float) Math.toDegrees(angle);
+        angle = Math.abs(angle);
+        angle = (float) Math.toDegrees(angle);
+
+        if(this.positionX<this.goToPosition[0])
+        {
+                if (this.positionY<this.goToPosition[1])
+                {
+                    angle = 360-(90-angle);
+                }
+                else
+                {
+                    angle = 90-angle;
+                }
+        }
+        else
+        {
+                if (this.positionY<this.goToPosition[1])
+                {
+                    angle=180+(90-angle);
+                }
+                else
+                {
+                    angle = 90+angle;
+                }
+        }
+
+
+        System.out.println(angle);
+        return angle;
     }
 
     private boolean stopGoTo()
