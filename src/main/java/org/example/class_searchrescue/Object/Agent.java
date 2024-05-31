@@ -98,6 +98,7 @@ public class Agent extends ObjectScheme {
 
     public float[] updatePosition()
     {
+
         float[] position = new float[2];
         position[0] = this.positionX;
         position[1] = this.positionY;
@@ -110,10 +111,12 @@ public class Agent extends ObjectScheme {
             case FOUNDED:
                 return position;
             case GOTO:
+
                 this.directionAngle = angleToGo();
                 if (stopGoTo())
                 {
                     this.state=State.FOUNDED;
+                    return position;
                 }
                 else
                 {
@@ -250,10 +253,14 @@ public class Agent extends ObjectScheme {
     }
     private float angleToGo(){
         float angle;
+        System.out.print(goToPosition[0]+" ");
+        System.out.print(this.positionX+" ");
+        System.out.print(goToPosition[1]+" ");
+        System.out.println(this.positionY+" ");
 
         angle = (float) Math.atan((this.goToPosition[0]-this.positionX)/(this.goToPosition[1]-this.positionY));
-        angle = (float) (2*Math.PI-angle);
-
+        System.out.println(Math.toDegrees(angle));
+        angle = (float) (Math.PI-angle);
         return (float) Math.toDegrees(angle);
     }
 
@@ -261,6 +268,8 @@ public class Agent extends ObjectScheme {
     {
         float distanceToDo = this.incrementStep*this.velocityMagnitude;
 
+        System.out.print(calculDistance(this.positionX,this.positionY,goToPosition[0],goToPosition[1]));
+        System.out.println("  <   " + distanceToDo);
         if(calculDistance(this.positionX,this.positionY,goToPosition[0],goToPosition[1])<distanceToDo)
         {
             return true;
@@ -298,7 +307,7 @@ public class Agent extends ObjectScheme {
 
     public void communication(ArrayList<Agent> agents)
     {
-        if(this.state == State.FOUNDED)
+        if(this.state == State.FOUNDED || this.state == State.GOTO)
         {
             float distance;
             for(int i = 0;i<agents.size();i++)
@@ -307,7 +316,14 @@ public class Agent extends ObjectScheme {
 
                 if(distance<=this.radiusCommunication && agents.get(i).getState()==State.SEARCHING)
                 {
-                    agents.get(i).setGoToPosition(this.getPosition());
+                    if (this.state == State.FOUNDED)
+                    {
+                        agents.get(i).setGoToPosition(this.getPosition());
+                    }
+                    else if (this.state == State.GOTO)
+                    {
+                        agents.get(i).setGoToPosition(this.goToPosition);
+                    }
                 }
             }
         }

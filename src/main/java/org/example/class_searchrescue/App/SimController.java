@@ -62,7 +62,7 @@ public class SimController {
         agents.clear();
         for(int i=0;i<this.numberOfAgents;i++)
         {
-            agents.add(new Agent(50,200,1,agentImage,(float)canvas.getWidth(),(float)canvas.getHeight()));
+            agents.add(new Agent(100,200,1,agentImage,(float)canvas.getWidth(),(float)canvas.getHeight()));
         }
     }
 
@@ -81,8 +81,6 @@ public class SimController {
 
                 for (int i = 0;i< agents.size();i++)
                 {
-                    System.out.print("agent "+i+" : "+agents.get(i).getState()+"      ");
-                    System.out.println();
 
                     float[] newPositions = agents.get(i).updatePosition();
                     agents.get(i).changePosition(newPositions[0],newPositions[1]);
