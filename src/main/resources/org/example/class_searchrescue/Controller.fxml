@@ -15,10 +15,13 @@
                   <Image url="@../../../back2.jpg" />
                </image>
             </ImageView>
+            <Rectangle fx:id="SquareMan1" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="56.0" layoutX="15.0" layoutY="73.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="59.0" />
+            <Rectangle fx:id="SquareMan11" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="56.0" layoutX="80.0" layoutY="73.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="59.0" />
+            <Rectangle fx:id="SquareMan111" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="56.0" layoutX="145.0" layoutY="73.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="59.0" />
             <Rectangle fx:id="SquareMan" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="56.0" layoutX="15.0" layoutY="166.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
             <Rectangle fx:id="SquareHelicopter" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="56.0" layoutX="80.0" layoutY="166.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
             <Rectangle fx:id="SquareDrone" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="56.0" layoutX="145.0" layoutY="166.0" stroke="BLACK" strokeType="INSIDE" width="59.0" />
-            <Button layoutX="85.0" layoutY="76.0" mnemonicParsing="false" onAction="#stopSim" opacity="0.0" prefHeight="49.0" prefWidth="49.0" />
+            <Rectangle fx:id="SquareMan112" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="60.0" layoutX="15.0" layoutY="265.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="140.0" />
               <Text layoutX="15.0" layoutY="35.0" text="Simulation controls" wrappingWidth="241.36131286621094">
                <font>
                   <Font size="24.0" />
@@ -29,7 +32,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Text layoutX="15.0" layoutY="147.0" text="Choose your icon :" wrappingWidth="241.36131286621094">
+            <Text layoutX="15.0" layoutY="153.0" text="Choose your icon :" wrappingWidth="241.36131286621094">
                <font>
                   <Font size="18.0" />
                </font>
@@ -49,7 +52,6 @@
                   <Image url="@../../../drone.png" />
                </image>
             </ImageView>
-            <Button layoutX="150.0" layoutY="76.0" mnemonicParsing="false" onAction="#resetSim" prefHeight="49.0" prefWidth="49.0" />
             <Button contentDisplay="GRAPHIC_ONLY" layoutX="80.0" layoutY="170.0" mnemonicParsing="false" onAction="#changeImageHelicopter" opacity="0.0" prefHeight="56.0" prefWidth="59.0" textFill="TRANSPARENT" />
             <Button contentDisplay="GRAPHIC_ONLY" layoutX="145.0" layoutY="170.0" mnemonicParsing="false" onAction="#changeImageDrone" opacity="0.0" prefHeight="56.0" prefWidth="59.0" />
             <Button contentDisplay="GRAPHIC_ONLY" layoutX="15.0" layoutY="170.0" mnemonicParsing="false" onAction="#changeImageMan" opacity="0.0" prefHeight="56.0" prefWidth="59.0" />
@@ -69,6 +71,19 @@
                </image>
             </ImageView>
             <Button contentDisplay="TOP" layoutX="17.0" layoutY="76.0" mnemonicParsing="false" onAction="#startSim" opacity="0.0" prefHeight="49.0" prefWidth="49.0" textFill="#0b0b0b" />
+            <Button layoutX="150.0" layoutY="76.0" mnemonicParsing="false" onAction="#resetSim" opacity="0.0" prefHeight="49.0" prefWidth="49.0" />
+            <Button layoutX="85.0" layoutY="76.0" mnemonicParsing="false" onAction="#stopSim" opacity="0.0" prefHeight="49.0" prefWidth="49.0" />
+            <ImageView fitHeight="49.0" fitWidth="59.0" layoutX="56.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Files-PNG-File.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="15.0" layoutY="265.0" mnemonicParsing="false" onAction="#loadConfig" opacity="0.0" prefHeight="60.0" prefWidth="140.0" />
+            <Text layoutX="15.0" layoutY="252.0" text="Choose the configuration file :" wrappingWidth="241.36131286621094">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
     </children>

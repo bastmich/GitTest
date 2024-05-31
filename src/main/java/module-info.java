@@ -1,6 +1,7 @@
 module org.example.class_searchrescue {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens org.example.class_searchrescue to javafx.fxml;

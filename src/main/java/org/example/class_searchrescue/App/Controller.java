@@ -5,6 +5,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import org.example.class_searchrescue.Application;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+
 
 public class Controller {
 
@@ -34,7 +40,7 @@ public class Controller {
 
  @FXML
  private void initialize() {
-  SquareMan.setVisible(false);
+  SquareMan.setVisible(true);
   SquareHelicopter.setVisible(false);
   SquareDrone.setVisible(false);
 
@@ -48,6 +54,13 @@ public class Controller {
          running = true;
          app.simController.startSim();
      }
+
+     //Visibility management
+        if (running) {
+            SquareMan.setVisible(true);
+            SquareHelicopter.setVisible(false);
+            SquareDrone.setVisible(false);
+        }
     };
     @FXML
     private void stopSim(){
@@ -60,7 +73,34 @@ public class Controller {
     @FXML
     private void resetSim(){};
     @FXML
-    private void loadConfig(){};
+    private void loadConfig(){
+
+        //Open file browser and choose
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int result = fileChooser.showOpenDialog(null);
+        File selectedFile = fileChooser.getSelectedFile();
+
+        File configFile = new File(selectedFile.getAbsolutePath());
+
+        // Check if file exist
+        if (!configFile.exists() || !configFile.isFile()) {
+            System.out.println("This file doesn't exist: " + selectedFile.getAbsolutePath());
+            return;
+        }
+
+        // Use BufferReader
+        try (BufferedReader br = new BufferedReader(new FileReader(configFile))) {
+            String line;
+            //Read file
+            while ((line = br.readLine()) != null) {
+
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println("Error : " + e.getMessage());
+        }
+    };
 
     @FXML
     private void changeImageMan(){
@@ -72,9 +112,11 @@ public class Controller {
      System.out.println("man");
 
      //Visibility management
-     SquareMan.setVisible(true);
-     SquareHelicopter.setVisible(false);
-     SquareDrone.setVisible(false);
+        if (running){
+            SquareMan.setVisible(true);
+            SquareHelicopter.setVisible(false);
+            SquareDrone.setVisible(false);
+        }
 
     };
     @FXML
@@ -84,9 +126,11 @@ public class Controller {
       app.simController.agents.get(i).changeImage(agentHelicopter);
      }
      //Visibility management
-     SquareMan.setVisible(false);
-     SquareHelicopter.setVisible(true);
-     SquareDrone.setVisible(false);
+        if (running) {
+            SquareMan.setVisible(false);
+            SquareHelicopter.setVisible(true);
+            SquareDrone.setVisible(false);
+        }
     };
     @FXML
     private void changeImageDrone(){
@@ -96,9 +140,11 @@ public class Controller {
      }
 
      //Visibility management
-     SquareMan.setVisible(false);
-     SquareHelicopter.setVisible(false);
-     SquareDrone.setVisible(true);
+        if (running) {
+            SquareMan.setVisible(false);
+            SquareHelicopter.setVisible(false);
+            SquareDrone.setVisible(true);
+        }
     };
 
 
