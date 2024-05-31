@@ -34,6 +34,7 @@ public class SimController {
     private Target target = new Target(targetImage);
 
 
+
     public SimController() {
 
     }
@@ -41,6 +42,7 @@ public class SimController {
     @FXML
     private void initialize() {
         initializeAnimationTimer();
+        target.changePosition(400,400);
         System.out.println("initialized");
         System.out.println(animationTimer);
         System.out.println(canvas);
@@ -60,7 +62,7 @@ public class SimController {
         agents.clear();
         for(int i=0;i<this.numberOfAgents;i++)
         {
-            agents.add(new Agent(0,0,1,agentImage,(float)canvas.getWidth(),(float)canvas.getHeight()));
+            agents.add(new Agent(50,200,1,agentImage,(float)canvas.getWidth(),(float)canvas.getHeight()));
         }
     }
 
@@ -75,13 +77,32 @@ public class SimController {
                 double t = (now - startNanoTime) / 1000000000.0;
 
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-                gc.drawImage(target.getImage(), 400, 400);
+                gc.drawImage(target.getImage(), target.getPositionX(), target.getPositionY());
 
                 for (int i = 0;i< agents.size();i++)
                 {
+                    System.out.print("agent "+i+" : "+agents.get(i).getState()+"      ");
+                    System.out.println();
+
                     float[] newPositions = agents.get(i).updatePosition();
                     agents.get(i).changePosition(newPositions[0],newPositions[1]);
                     gc.drawImage(agents.get(i).getImage(),newPositions[0],newPositions[1]);
+
+                    if (agents.get(i).checkTarget(target))
+                    {
+                        target.newFounded();
+                    }
+
+                    ArrayList<Agent> agentToCommunicate = new ArrayList<>();
+                    for (int j=0;j<agents.size();j++)
+                    {
+                        if (j!=i)
+                        {
+                            agentToCommunicate.add(agents.get(j));
+                        }
+                    }
+
+                    agents.get(i).communication(agentToCommunicate);
 
                 }
             }
@@ -91,7 +112,6 @@ public class SimController {
 
 
     public void startSim() {
-        System.out.println("try");
         initializeAgent();
         initializeAnimationTimer();
 
