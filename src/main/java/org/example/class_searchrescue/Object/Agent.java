@@ -96,7 +96,7 @@ public class Agent extends ObjectScheme {
         }
     }
 
-    public float[] updatePosition()
+    public float[] updatePosition(Target target)
     {
 
         float[] position = new float[2];
@@ -115,6 +115,7 @@ public class Agent extends ObjectScheme {
                 this.directionAngle = angleToGo();
                 if (stopGoTo())
                 {
+                    target.newFounded();
                     this.state=State.FOUNDED;
                     return position;
                 }
@@ -253,10 +254,7 @@ public class Agent extends ObjectScheme {
     }
     private float angleToGo(){
         float angle;
-        System.out.print(goToPosition[0]+" ");
-        System.out.print(this.positionX+" ");
-        System.out.print(goToPosition[1]+" ");
-        System.out.println(this.positionY+" ");
+
 
         angle = (float) Math.atan((this.goToPosition[0]-this.positionX)/(this.goToPosition[1]-this.positionY));
         angle = Math.abs(angle);
@@ -286,7 +284,7 @@ public class Agent extends ObjectScheme {
         }
 
 
-        System.out.println(angle);
+
         return angle;
     }
 
@@ -294,8 +292,6 @@ public class Agent extends ObjectScheme {
     {
         float distanceToDo = this.incrementStep*this.velocityMagnitude;
 
-        System.out.print(calculDistance(this.positionX,this.positionY,goToPosition[0],goToPosition[1]));
-        System.out.println("  <   " + distanceToDo);
         if(calculDistance(this.positionX,this.positionY,goToPosition[0],goToPosition[1])<distanceToDo)
         {
             return true;

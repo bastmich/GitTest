@@ -50,6 +50,7 @@ public class Controller {
 
     @FXML
     private void startSim(){
+        System.out.println(running);
      if (!running) {
          System.out.println("run");
 
@@ -58,8 +59,8 @@ public class Controller {
      }
      else
      {
+         System.out.println("restart");
          app.simController.restartSim();
-         running = true;
      }
 
      //Visibility management
@@ -74,7 +75,6 @@ public class Controller {
         if (running) {
 
             app.simController.stopSim();
-            running = false;
         }
     };
 

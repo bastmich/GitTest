@@ -24,6 +24,7 @@ public class SimController {
     private Label status;
 
     private int numberOfAgents =5;
+    private int numberOfFounded = 3;
 
     private AnimationTimer animationTimer;
 
@@ -73,6 +74,12 @@ public class SimController {
             @Override
             public void handle(long now) {
 
+                System.out.println(target.getFounded());
+                if(target.getFounded()>=numberOfFounded)
+                {
+                    animationTimer.stop();
+                }
+
                 GraphicsContext gc = canvas.getGraphicsContext2D();
                 double t = (now - startNanoTime) / 1000000000.0;
 
@@ -82,7 +89,7 @@ public class SimController {
                 for (int i = 0;i< agents.size();i++)
                 {
 
-                    float[] newPositions = agents.get(i).updatePosition();
+                    float[] newPositions = agents.get(i).updatePosition(target);
                     agents.get(i).changePosition(newPositions[0],newPositions[1]);
                     gc.drawImage(agents.get(i).getImage(),newPositions[0],newPositions[1]);
 
@@ -112,6 +119,7 @@ public class SimController {
     public void startSim() {
         initializeAgent();
         initializeAnimationTimer();
+        target.resetFounded();
 
         System.out.println(animationTimer);
         if (animationTimer != null) {
