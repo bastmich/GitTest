@@ -67,4 +67,5 @@ public class Target extends ObjectScheme{
     {
         this.founded +=1;
     }
+    public void resetFounded(){this.founded=0;}
 }

@@ -96,8 +96,9 @@ public class Agent extends ObjectScheme {
         }
     }
 
-    public float[] updatePosition()
+    public float[] updatePosition(Target target)
     {
+
         float[] position = new float[2];
         position[0] = this.positionX;
         position[1] = this.positionY;
@@ -110,10 +111,13 @@ public class Agent extends ObjectScheme {
             case FOUNDED:
                 return position;
             case GOTO:
+
                 this.directionAngle = angleToGo();
                 if (stopGoTo())
                 {
+                    target.newFounded();
                     this.state=State.FOUNDED;
+                    return position;
                 }
                 else
                 {
@@ -164,7 +168,7 @@ public class Agent extends ObjectScheme {
             position[1]= this.positionY+deltaY;
         }
         //Fourth cadran
-        else if(this.directionAngle >= 270 && this.directionAngle < 360)
+        else if(this.directionAngle >= 270 && this.directionAngle <= 360)
         {
             //Calcul of deltaX and deltaY
             deltaX = (float) (Math.cos(Math.toRadians(this.directionAngle-270))*distanceToDo);
@@ -251,10 +255,37 @@ public class Agent extends ObjectScheme {
     private float angleToGo(){
         float angle;
 
-        angle = (float) Math.atan((this.goToPosition[0]-this.positionX)/(this.goToPosition[1]-this.positionY));
-        angle = (float) (2*Math.PI-angle);
 
-        return (float) Math.toDegrees(angle);
+        angle = (float) Math.atan((this.goToPosition[0]-this.positionX)/(this.goToPosition[1]-this.positionY));
+        angle = Math.abs(angle);
+        angle = (float) Math.toDegrees(angle);
+
+        if(this.positionX<this.goToPosition[0])
+        {
+                if (this.positionY<this.goToPosition[1])
+                {
+                    angle = 360-(90-angle);
+                }
+                else
+                {
+                    angle = 90-angle;
+                }
+        }
+        else
+        {
+                if (this.positionY<this.goToPosition[1])
+                {
+                    angle=180+(90-angle);
+                }
+                else
+                {
+                    angle = 90+angle;
+                }
+        }
+
+
+
+        return angle;
     }
 
     private boolean stopGoTo()
@@ -298,7 +329,7 @@ public class Agent extends ObjectScheme {
 
     public void communication(ArrayList<Agent> agents)
     {
-        if(this.state == State.FOUNDED)
+        if(this.state == State.FOUNDED || this.state == State.GOTO)
         {
             float distance;
             for(int i = 0;i<agents.size();i++)
@@ -307,7 +338,14 @@ public class Agent extends ObjectScheme {
 
                 if(distance<=this.radiusCommunication && agents.get(i).getState()==State.SEARCHING)
                 {
-                    agents.get(i).setGoToPosition(this.getPosition());
+                    if (this.state == State.FOUNDED)
+                    {
+                        agents.get(i).setGoToPosition(this.getPosition());
+                    }
+                    else if (this.state == State.GOTO)
+                    {
+                        agents.get(i).setGoToPosition(this.goToPosition);
+                    }
                 }
             }
         }
