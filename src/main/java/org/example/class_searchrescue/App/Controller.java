@@ -51,13 +51,13 @@ public class Controller {
     @FXML
     private void startSim(){
         System.out.println(running);
-     if (!running) {
+     if (!running && SimController.actualNumberOfFound<SimController.numberOfFounded) {
          System.out.println("run");
 
          app.simController.startSim();
          running = true;
      }
-     else
+     else if(SimController.actualNumberOfFound<SimController.numberOfFounded)
      {
          System.out.println("restart");
          app.simController.restartSim();

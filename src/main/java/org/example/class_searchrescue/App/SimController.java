@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import org.example.class_searchrescue.Object.Agent;
 import org.example.class_searchrescue.Object.Target;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class SimController {
@@ -24,15 +25,18 @@ public class SimController {
     private Label status;
 
     private int numberOfAgents =5;
-    private int numberOfFounded = 3;
+    static int numberOfFounded = 3;
+    static int actualNumberOfFound;
 
     private AnimationTimer animationTimer;
 
     private Image targetImage = new Image("target.png");
     private Image agentImage = new Image("human.png");
+
     protected static ArrayList<Agent> agents = new ArrayList<>();
 
     private Target target = new Target(targetImage);
+
 
 
 
@@ -63,7 +67,7 @@ public class SimController {
         agents.clear();
         for(int i=0;i<this.numberOfAgents;i++)
         {
-            agents.add(new Agent(100,200,100,agentImage,(float)canvas.getWidth(),(float)canvas.getHeight()));
+            agents.add(new Agent(100,200,10,agentImage,(float)canvas.getWidth(),(float)canvas.getHeight()));
         }
     }
 
@@ -88,7 +92,7 @@ public class SimController {
 
                 for (int i = 0;i< agents.size();i++)
                 {
-
+                    actualNumberOfFound = target.getFounded();
                     float[] newPositions = agents.get(i).updatePosition(target);
                     agents.get(i).changePosition(newPositions[0],newPositions[1]);
                     gc.drawImage(agents.get(i).getImage(),newPositions[0],newPositions[1]);
