@@ -63,12 +63,6 @@ public class Controller {
          app.simController.restartSim();
      }
 
-     //Visibility management
-        if (running) {
-            SquareMan.setVisible(true);
-            SquareHelicopter.setVisible(false);
-            SquareDrone.setVisible(false);
-        }
     };
     @FXML
     private void stopSim(){
@@ -80,6 +74,21 @@ public class Controller {
 
     @FXML
     private void resetSim(){
+
+
+        if(SquareMan.isVisible())
+        {
+            SimController.agentImage =agentMan;
+        }
+        else if(SquareDrone.isVisible())
+        {
+            SimController.agentImage = agentDrone;
+        }
+        else if(SquareHelicopter.isVisible())
+        {
+            SimController.agentImage=agentHelicopter;
+        }
+
         app.simController.resetSim();
     };
     @FXML
@@ -122,11 +131,10 @@ public class Controller {
      System.out.println("man");
 
      //Visibility management
-        if (running){
+
             SquareMan.setVisible(true);
             SquareHelicopter.setVisible(false);
             SquareDrone.setVisible(false);
-        }
 
     };
     @FXML
@@ -136,11 +144,11 @@ public class Controller {
       app.simController.agents.get(i).changeImage(agentHelicopter);
      }
      //Visibility management
-        if (running) {
+
             SquareMan.setVisible(false);
             SquareHelicopter.setVisible(true);
             SquareDrone.setVisible(false);
-        }
+
     };
     @FXML
     private void changeImageDrone(){
@@ -150,11 +158,11 @@ public class Controller {
      }
 
      //Visibility management
-        if (running) {
+
             SquareMan.setVisible(false);
             SquareHelicopter.setVisible(false);
             SquareDrone.setVisible(true);
-        }
+
     };
 
 

@@ -31,7 +31,10 @@ public class SimController {
     private AnimationTimer animationTimer;
 
     private Image targetImage = new Image("target.png");
-    private Image agentImage = new Image("human.png");
+    static Image agentImage = new Image("human.png");
+
+    private Image clearImage = new Image("Clear.png");
+    private Image foundImage = new Image("Rescued.jpg");
 
     protected static ArrayList<Agent> agents = new ArrayList<>();
 
@@ -77,46 +80,51 @@ public class SimController {
             final long startNanoTime = System.nanoTime();
             @Override
             public void handle(long now) {
-
+                GraphicsContext gc = canvas.getGraphicsContext2D();
                 System.out.println(target.getFounded());
                 if(target.getFounded()>=numberOfFounded)
                 {
+                    for(int i =0;i<agents.size();i++)
+                    {
+                        agents.get(i).changeImage(clearImage);
+                        gc.drawImage(agents.get(i).getImage(), 0, 0);
+                    }
+                    target.changeImage(foundImage);
+                    System.out.println("trouvé");
                     animationTimer.stop();
                 }
+                else
+                {
 
-                GraphicsContext gc = canvas.getGraphicsContext2D();
                 double t = (now - startNanoTime) / 1000000000.0;
 
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
                 gc.drawImage(target.getImage(), target.getPositionX(), target.getPositionY());
 
-                for (int i = 0;i< agents.size();i++)
-                {
+                for (int i = 0;i< agents.size();i++) {
                     actualNumberOfFound = target.getFounded();
                     float[] newPositions = agents.get(i).updatePosition(target);
-                    agents.get(i).changePosition(newPositions[0],newPositions[1]);
-                    gc.drawImage(agents.get(i).getImage(),newPositions[0],newPositions[1]);
+                    agents.get(i).changePosition(newPositions[0], newPositions[1]);
+                    gc.drawImage(agents.get(i).getImage(), newPositions[0], newPositions[1]);
 
-                    if (agents.get(i).checkTarget(target))
-                    {
+                    if (agents.get(i).checkTarget(target)) {
                         target.newFounded();
                     }
 
                     ArrayList<Agent> agentToCommunicate = new ArrayList<>();
-                    for (int j=0;j<agents.size();j++)
-                    {
-                        if (j!=i)
-                        {
+                    for (int j = 0; j < agents.size(); j++) {
+                        if (j != i) {
                             agentToCommunicate.add(agents.get(j));
                         }
                     }
 
                     agents.get(i).communication(agentToCommunicate);
+                }
 
                 }
             }
         };
-        System.out.println("init");
+
     }
 
 
