@@ -17,13 +17,6 @@ public class SimController {
     @FXML
     private Canvas canvas;
 
-    @FXML
-    private Label timerSecond;
-    @FXML
-    private Label timerMinute;
-    @FXML
-    private Label status;
-
     private int numberOfAgents =5;
     static int numberOfFounded = 3;
     static int actualNumberOfFound;
@@ -33,8 +26,8 @@ public class SimController {
     private Image targetImage = new Image("target.png");
     static Image agentImage = new Image("human.png");
 
-    private Image clearImage = new Image("Clear.png");
-    private Image foundImage = new Image("Rescued.jpg");
+    private Image backImage = new Image("back1.jpg");
+    private Image foundImage = new Image("complete.png");
 
     protected static ArrayList<Agent> agents = new ArrayList<>();
 
@@ -81,16 +74,12 @@ public class SimController {
             @Override
             public void handle(long now) {
                 GraphicsContext gc = canvas.getGraphicsContext2D();
+                Controller.displayTime(calculTime(now-startNanoTime));
                 System.out.println(target.getFounded());
                 if(target.getFounded()>=numberOfFounded)
                 {
-                    for(int i =0;i<agents.size();i++)
-                    {
-                        agents.get(i).changeImage(clearImage);
-                        gc.drawImage(agents.get(i).getImage(), 0, 0);
-                    }
-                    target.changeImage(foundImage);
-                    System.out.println("trouvé");
+                    gc.drawImage(backImage,0,0);
+                    gc.drawImage(foundImage, 150, 200);
                     animationTimer.stop();
                 }
                 else
@@ -99,6 +88,7 @@ public class SimController {
                 double t = (now - startNanoTime) / 1000000000.0;
 
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+                gc.drawImage(backImage,0,0);
                 gc.drawImage(target.getImage(), target.getPositionX(), target.getPositionY());
 
                 for (int i = 0;i< agents.size();i++) {
@@ -127,12 +117,25 @@ public class SimController {
 
     }
 
+    private int[] calculTime(long actualnS)
+    {
+        int[] myTime = new int[2];
+        long second=0;
+        long millisecond=0;
+        second= actualnS/1000000000;
+        millisecond=actualnS/1000000;
 
+
+        myTime[0]= (int) second;
+        myTime[1] = (int) millisecond;
+
+        return myTime;
+    }
     public void startSim() {
         initializeAgent();
         initializeAnimationTimer();
         target.resetFounded();
-
+        target.changeImage(targetImage);
         System.out.println(animationTimer);
         if (animationTimer != null) {
             System.out.println("Simulation started");

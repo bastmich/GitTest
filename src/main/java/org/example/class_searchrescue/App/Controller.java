@@ -34,6 +34,9 @@ public class Controller {
     @FXML Label agentSpeed;
     @FXML Label agentDetetctionRange;
     @FXML Label agentCommunicationRange;
+    @FXML static Label LabelS;
+    @FXML static Label LabelMs;
+
     @FXML Rectangle SquareMan;
     @FXML Rectangle SquareHelicopter;
     @FXML Rectangle SquareDrone;
@@ -44,6 +47,7 @@ public class Controller {
   SquareMan.setVisible(true);
   SquareHelicopter.setVisible(false);
   SquareDrone.setVisible(false);
+     System.out.println("controller");
 
  }
 
@@ -165,9 +169,11 @@ public class Controller {
 
     };
 
+     static void displayTime(int[] actualTime)
+    {
+        LabelS.setText(String.valueOf(actualTime[0]));
+        LabelMs.setText(String.valueOf(actualTime[1]));
+    }
 
-
-
-    private void initialisation(){}
 
 }
