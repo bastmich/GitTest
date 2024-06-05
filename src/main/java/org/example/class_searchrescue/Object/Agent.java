@@ -214,9 +214,10 @@ public class Agent extends ObjectScheme {
         float distanceToDo = this.incrementStep * this.velocityMagnitude;
         float deltaX;
         float deltaY;
+        //The angle is changed is the agent goes into a wall
         this.directionAngle = checkWallCollision(this.directionAngle);
 
-        //The new position is calculated
+        //The new position is calculated in function of the direction's angle
         if (this.directionAngle >= 0 && this.directionAngle < 90) {
             deltaX = (float) (Math.cos(Math.toRadians(this.directionAngle)) * distanceToDo);
             deltaY = (float) (Math.sin(Math.toRadians(this.directionAngle)) * distanceToDo);
@@ -248,6 +249,7 @@ public class Agent extends ObjectScheme {
      * @return the new direction angle after collision adjustments
      */
     private float checkWallCollision(float angle) {
+        //If the agent goes into a wall the opposite angle is returned
         if (this.positionY + this.imageSize > this.maxWindowY || this.positionX + this.imageSize > this.maxWindowX || this.positionY < 0 || this.positionX < 0) {
             if (angle >= 0 && angle < 90) {
                 if ((this.positionX + this.imageSize) > this.maxWindowX) {
@@ -285,7 +287,7 @@ public class Agent extends ObjectScheme {
     }
 
     /**
-     * Calculates the angle needed to move towards the goToPosition.
+     * Calculates the angle needed to move towards another agent.
      *
      * @return the angle to move towards the goToPosition
      */
