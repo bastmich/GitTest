@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 public class Target extends ObjectScheme{
 
     private int founded;
-    private int imageSize;
+    private int imageSize =100;
 
     public Target(Image image)
     {
