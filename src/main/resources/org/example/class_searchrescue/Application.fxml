@@ -29,7 +29,7 @@
          <!-- Controller -->
          <fx:include maxHeight="800.0" maxWidth="400.0" minHeight="800.0" minWidth="400.0" prefHeight="800.0" prefWidth="400.0" source="Controller.fxml" StackPane.alignment="TOP_RIGHT" />
         <Canvas fx:id="canvas" height="800.0" width="800.0" StackPane.alignment="TOP_LEFT" />
-        <HBox maxHeight="200.0" maxWidth="400.0" minHeight="200.0" minWidth="400.0" prefHeight="200.0" prefWidth="400.0" StackPane.alignment="BOTTOM_RIGHT" >
+        <HBox maxHeight="30.0" maxWidth="400.0" minHeight="30.0" minWidth="400.0" prefHeight="30.0" prefWidth="400.0" StackPane.alignment="BOTTOM_RIGHT">
             <Label fx:id="LabelS" text="LabelS">
                 <font>
                     <Font size="18.0" />
