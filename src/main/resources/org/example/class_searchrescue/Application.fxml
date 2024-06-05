@@ -5,29 +5,51 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
 <VBox alignment="TOP_CENTER" maxHeight="800.0" maxWidth="1200.0" minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0" spacing="0.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.class_searchrescue.App.SimController">
     <!-- StackPane to contain the canvas and rectangle -->
     <StackPane>
-      <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_LEFT">
-         <image>
-            <Image url="@../../../back1.jpg" />
-         </image></ImageView>
+        <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_LEFT">
+            <image>
+                <Image url="@../../../back1.jpg" />
+            </image>
+        </ImageView>
         <!-- Rectangle surrounding the canvas -->
         <Rectangle fill="transparent" height="800.0" stroke="black" strokeWidth="2" width="800.0" StackPane.alignment="TOP_LEFT" />
 
-          <!-- Spacer -->
+        <!-- Spacer -->
 
 
-          <!-- StackPane to contain the controller and rectangle -->
-       <StackPane maxHeight="800.0" maxWidth="400.0" minHeight="800.0" minWidth="400.0" prefHeight="800.0" prefWidth="400.0" StackPane.alignment="TOP_RIGHT">
-           <!-- Rectangle surrounding the controller -->
-           <Rectangle fill="transparent" height="800.0" stroke="black" strokeWidth="2" width="400.0" StackPane.alignment="TOP_RIGHT" />
-           <!-- Controller -->
-           <fx:include maxHeight="800.0" maxWidth="400.0" minHeight="800.0" minWidth="400.0" prefHeight="800.0" prefWidth="400.0" source="Controller.fxml" StackPane.alignment="TOP_RIGHT" />
-       </StackPane>
-      <Canvas fx:id="canvas" height="800.0" width="800.0" StackPane.alignment="TOP_LEFT" />
-      <Label fx:id="LabelS" layoutX="596.0" layoutY="403.0" text="Label" StackPane.alignment="TOP_LEFT" />
-      <Label fx:id="LabelMs" text="Label" />
+        <!-- StackPane to contain the controller and rectangle -->
+        <StackPane maxHeight="800.0" maxWidth="400.0" minHeight="800.0" minWidth="400.0" prefHeight="800.0" prefWidth="400.0" StackPane.alignment="TOP_RIGHT">
+            <!-- Rectangle surrounding the controller -->
+            <Rectangle fill="transparent" height="800.0" stroke="black" strokeWidth="2" width="400.0" StackPane.alignment="TOP_RIGHT" />
+        </StackPane>
+         <!-- Controller -->
+         <fx:include maxHeight="800.0" maxWidth="400.0" minHeight="800.0" minWidth="400.0" prefHeight="800.0" prefWidth="400.0" source="Controller.fxml" StackPane.alignment="TOP_RIGHT" />
+        <Canvas fx:id="canvas" height="800.0" width="800.0" StackPane.alignment="TOP_LEFT" />
+        <HBox maxHeight="200.0" maxWidth="400.0" minHeight="200.0" minWidth="400.0" prefHeight="200.0" prefWidth="400.0" StackPane.alignment="BOTTOM_RIGHT" >
+            <Label fx:id="LabelS" text="LabelS">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Text layoutX="15.0" layoutY="153.0" text=" s ">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Text>
+            <Label fx:id="LabelMs" text="LabelMs">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Text layoutX="15.0" layoutY="153.0" text=" ms ">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Text>
+        </HBox>
     </StackPane>
 </VBox>

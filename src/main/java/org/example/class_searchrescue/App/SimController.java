@@ -16,6 +16,8 @@ public class SimController {
 
     @FXML
     private Canvas canvas;
+    @FXML private Label LabelS;
+    @FXML private Label LabelMs;
 
     private int numberOfAgents =5;
     static int numberOfFounded = 3;
@@ -74,7 +76,7 @@ public class SimController {
             @Override
             public void handle(long now) {
                 GraphicsContext gc = canvas.getGraphicsContext2D();
-                Controller.displayTime(calculTime(now-startNanoTime));
+                displayTime(calculTime(now-startNanoTime));
                 System.out.println(target.getFounded());
                 if(target.getFounded()>=numberOfFounded)
                 {
@@ -124,12 +126,18 @@ public class SimController {
         long millisecond=0;
         second= actualnS/1000000000;
         millisecond=actualnS/1000000;
+        millisecond = millisecond-1000*second;
 
 
         myTime[0]= (int) second;
         myTime[1] = (int) millisecond;
 
         return myTime;
+    }
+    private void displayTime(int[] myTime)
+    {
+        LabelS.setText(String.valueOf(myTime[0]));
+        LabelMs.setText(String.valueOf(myTime[1]));
     }
     public void startSim() {
         initializeAgent();
@@ -159,4 +167,6 @@ public class SimController {
         stopSim();
         startSim();
     }
+
+
 }
