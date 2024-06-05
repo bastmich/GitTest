@@ -25,7 +25,7 @@ public class SimController {
 
     private AnimationTimer animationTimer;
 
-    private Image targetImage = new Image("target.png");
+    private static Image targetImage = new Image("target.png");
     static Image agentImage = new Image("human.png");
 
     private Image backImage = new Image("back1.jpg");
@@ -33,7 +33,7 @@ public class SimController {
 
     protected static ArrayList<Agent> agents = new ArrayList<>();
 
-    private Target target = new Target(targetImage);
+    protected static Target target = new Target(targetImage);
 
 
 
@@ -65,7 +65,7 @@ public class SimController {
         agents.clear();
         for(int i=0;i<this.numberOfAgents;i++)
         {
-            agents.add(new Agent(100,200,10,agentImage,(float)canvas.getWidth(),(float)canvas.getHeight()));
+            agents.add(new Agent(50,100,10,agentImage,(float)canvas.getWidth(),(float)canvas.getHeight()));
         }
     }
 
