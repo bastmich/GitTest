@@ -125,10 +125,16 @@ public class Agent extends ObjectScheme {
     /**
      * Sets the detection radius of the agent.
      *
-     * @return the detection radius
      */
-    public float setRadiusDetection() {
-        return this.radiusDetection;
+    public void setRadiusDetection(float radius) {
+        this.radiusDetection = radius;
+    }
+    /**
+     * Sets the velocity of the agent.
+     *
+     */
+    public void setVelocity(float velocity){
+        this.velocityMagnitude=velocity;
     }
 
     /**
@@ -173,18 +179,25 @@ public class Agent extends ObjectScheme {
         //Call different position method in function of the current state
         switch (state) {
             case STANDBY:
+                //Stay at the same position
                 return position;
             case SEARCHING:
+                //Return the standard way
                 return Way();
             case FOUNDED:
+                //Stay at the same position
                 return position;
             case GOTO:
+                //Go in ther direction of the other agent
                 this.directionAngle = angleToGo();
+                //Stop searching if the target is found
                 if (stopGoTo()) {
+                    //Target is found
                     target.newFounded();
                     this.state = State.FOUNDED;
                     return position;
                 } else {
+                    //Continue to go in the other agent direction
                     return Way();
                 }
         }
@@ -203,6 +216,7 @@ public class Agent extends ObjectScheme {
         float deltaY;
         this.directionAngle = checkWallCollision(this.directionAngle);
 
+        //The new position is calculated
         if (this.directionAngle >= 0 && this.directionAngle < 90) {
             deltaX = (float) (Math.cos(Math.toRadians(this.directionAngle)) * distanceToDo);
             deltaY = (float) (Math.sin(Math.toRadians(this.directionAngle)) * distanceToDo);
