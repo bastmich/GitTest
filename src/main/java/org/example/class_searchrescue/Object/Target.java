@@ -1,72 +1,139 @@
 package org.example.class_searchrescue.Object;
 
 import javafx.scene.image.Image;
-
+/**
+ * The Target class represents a target in the simulation.
+ * The target has a position and can track how many times it has been found.
+ */
 public class Target extends ObjectScheme{
 
     private int founded;
-    private int imageSize =100;
+    private int imageSize = 100;
 
-    public Target(Image image)
-    {
-        this.image=image;
+    /**
+     * Constructs a Target with the specified image.
+     *
+     * @param image the image representing the target
+     */
+    public Target(Image image) {
+        this.image = image;
     }
 
+    /**
+     * Changes the image of the target.
+     *
+     * @param image the new image for the target
+     */
     @Override
     public void changeImage(Image image) {
         this.image = image;
     }
 
+    /**
+     * Changes the position of the target.
+     *
+     * @param positionX the new X coordinate of the target
+     * @param positionY the new Y coordinate of the target
+     */
     @Override
     public void changePosition(float positionX, float positionY) {
-        this.positionX = positionX-(imageSize/2);
-        this.positionY = positionY-(imageSize/2);
+        // Center the target image on the specified coordinates
+        this.positionX = positionX - (imageSize / 2);
+        this.positionY = positionY - (imageSize / 2);
     }
 
+    /**
+     * Changes the communication radius of the target.
+     *
+     * @param radius the new communication radius
+     */
     @Override
     public void changeRadiusCommunication(float radius) {
-        this.radiusCommunication=radius;
+        this.radiusCommunication = radius;
     }
 
+    /**
+     * Gets the current position of the target.
+     *
+     * @return an array containing the X and Y coordinates of the target
+     */
     @Override
     public float[] getPosition() {
-        float[] returnArray = new float[2];
-        returnArray[0] = this.positionX;
-        returnArray[1] = this.positionY;
-        return returnArray;
+        // Return the current position as an array
+        return new float[]{this.positionX, this.positionY};
     }
-    public float getPositionX()
-    {
+
+    /**
+     * Gets the X coordinate of the target.
+     *
+     * @return the X coordinate
+     */
+    public float getPositionX() {
         return this.positionX;
     }
-    public float getPositionY()
-    {
+
+    /**
+     * Gets the Y coordinate of the target.
+     *
+     * @return the Y coordinate
+     */
+    public float getPositionY() {
         return this.positionY;
     }
 
+    /**
+     * Gets the communication radius of the target.
+     *
+     * @return the communication radius
+     */
     @Override
     public float radiusCommunication() {
         return this.radiusCommunication;
     }
 
+    /**
+     * Gets the image of the target.
+     *
+     * @return the image of the target
+     */
     @Override
     public Image getImage() {
         return this.image;
     }
 
+    /**
+     * Determines if the target is within communication range of another object.
+     * This implementation always returns false as targets do not communicate.
+     *
+     * @param object the other object
+     * @return always false
+     */
     @Override
     public boolean isCommunication(ObjectScheme object) {
         return false;
     }
 
-    public int getFounded()
-    {
+    /**
+     * Gets the number of times the target has been found.
+     *
+     * @return the number of times the target has been found
+     */
+    public int getFounded() {
         return this.founded;
     }
 
-    public void newFounded()
-    {
-        this.founded +=1;
+    /**
+     * Increments the count of how many times the target has been found.
+     */
+    public void newFounded() {
+        this.founded += 1;
     }
-    public void resetFounded(){this.founded=0;}
+
+    /**
+     * Resets the count of how many times the target has been found to zero.
+     */
+    public void resetFounded() {
+        this.founded = 0;
+    }
+
 }
