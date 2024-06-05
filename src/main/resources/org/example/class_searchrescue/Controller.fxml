@@ -84,11 +84,31 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Label fx:id="targetPositionX" layoutX="91.0" layoutY="400.0" text="label" />
-            <Label fx:id="targetPositionY" layoutX="96.0" layoutY="472.0" text="Label" />
-            <Label fx:id="agentSpeed" layoutX="96.0" layoutY="522.0" text="Label" />
-            <Label fx:id="agentDetectionRange" layoutX="96.0" layoutY="595.0" text="Label" />
-            <Label fx:id="agentCommunicationRange" layoutX="96.0" layoutY="666.0" text="Label" />
+            <Label fx:id="targetPositionX" layoutX="191.0" layoutY="392.0" text="label" />
+            <Label fx:id="targetPositionY" layoutX="190.0" layoutY="416.0" text="Label" />
+            <Label fx:id="agentSpeed" layoutX="190.0" layoutY="446.0" text="Label" />
+            <Label fx:id="agentDetectionRange" layoutX="185.0" layoutY="564.0" text="Label" />
+            <Label fx:id="agentCommunicationRange" layoutX="185.0" layoutY="636.0" text="Label" />
+            <Text layoutX="15.0" layoutY="359.0" text="File informations :" wrappingWidth="241.36131286621094">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="15.0" layoutY="400.0" text="Target position x :" wrappingWidth="154.36131286621094">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="15.0" layoutY="430.0" text="Target position y :" wrappingWidth="154.36131286621094">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="15.0" layoutY="460.0" text="Agents speed :" wrappingWidth="154.36131286621094">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
     </children>
