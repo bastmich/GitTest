@@ -126,9 +126,10 @@ public class Controller {
                 switch (parts[0]) {
                     case "target_position_x_y":
                         targetPositionxFile = Integer.parseInt(parts[1]);
-                        targetPositionX.setText(parts[1]);
+                        targetPositionX.setText(Integer.toString(targetPositionxFile));
                         targetPositionyFile = Integer.parseInt(parts[2]);
                         targetPositionY.setText(Integer.toString(targetPositionyFile));
+                        app.simController.target.changePosition((float)targetPositionxFile,(float)targetPositionyFile);
                         break;
                     case "agents_speed":
                         agentsSpeedFile = Double.parseDouble(parts[1]);
@@ -147,6 +148,19 @@ public class Controller {
         } catch (IOException e) {
             System.out.println("Error : " + e.getMessage());
         }
+
+        //Update agents
+
+        for(int i=0;i<app.simController.agents.size();i++)
+        {
+            app.simController.agents.get(i).changeRadiusCommunication((float)agentsCommunicationRangeFile);
+            app.simController.agents.get(i).setRadiusDetection((float)agentsDetectionRangeFile);
+            app.simController.agents.get(i).setVelocity((float)agentsSpeedFile);
+
+        }
+
+
+
     };
 
     @FXML
