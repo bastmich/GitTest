@@ -15,8 +15,8 @@ import javax.swing.JFileChooser;
 public class Controller {
 
    private boolean running = false;
-   private boolean pause=false;
-    protected static boolean reset = false;
+
+
 
     private Image agentMan = new Image("human.png");
     private Image agentHelicopter = new Image("helicopter.png");
@@ -29,10 +29,10 @@ public class Controller {
     }
     public Controller(){}
 
-    @FXML Label targetPosition;
-    @FXML Label TargetPosition;
+    @FXML Label targetPositionX;
+    @FXML Label targetPositionY;
     @FXML Label agentSpeed;
-    @FXML Label agentDetetctionRange;
+    @FXML Label agentDetectionRange;
     @FXML Label agentCommunicationRange;
 
 
