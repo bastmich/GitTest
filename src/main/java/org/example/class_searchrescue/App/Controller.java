@@ -21,13 +21,19 @@ public class Controller {
     private Image agentMan = new Image("human.png");
     private Image agentHelicopter = new Image("helicopter.png");
     private Image agentDrone = new Image("drone.png");
-
     private Application app ;
+
+    private int targetPositionxFile;
+    private int targetPositionyFile;
+    private double agentsSpeedFile;
+    private int agentsDetectionRangeFile;
+    private int agentsCommunicationRangeFile;
 
     public Controller(Application app) {
         this.app = app;
     }
     public Controller(){}
+
 
     @FXML Label targetPositionX;
     @FXML Label targetPositionY;
@@ -116,8 +122,27 @@ public class Controller {
             String line;
             //Read file
             while ((line = br.readLine()) != null) {
-
-                System.out.println(line);
+                String[] parts = line.split(" ");
+                switch (parts[0]) {
+                    case "target_position_x_y":
+                        targetPositionxFile = Integer.parseInt(parts[1]);
+                        targetPositionX.setText(parts[1]);
+                        targetPositionyFile = Integer.parseInt(parts[2]);
+                        targetPositionY.setText(Integer.toString(targetPositionyFile));
+                        break;
+                    case "agents_speed":
+                        agentsSpeedFile = Double.parseDouble(parts[1]);
+                        agentSpeed.setText(Double.toString(agentsSpeedFile));
+                        break;
+                    case "agents_detection_range":
+                        agentsDetectionRangeFile = Integer.parseInt(parts[1]);
+                        agentDetectionRange.setText(Integer.toString(agentsDetectionRangeFile));
+                        break;
+                    case "agents_communication_range":
+                        agentsCommunicationRangeFile = Integer.parseInt(parts[1]);
+                        agentCommunicationRange.setText(Integer.toString(agentsCommunicationRangeFile));
+                        break;
+                }
             }
         } catch (IOException e) {
             System.out.println("Error : " + e.getMessage());
@@ -167,8 +192,5 @@ public class Controller {
             SquareDrone.setVisible(true);
 
     };
-
-
-
 
 }

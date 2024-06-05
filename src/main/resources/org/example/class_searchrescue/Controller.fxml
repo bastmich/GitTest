@@ -84,6 +84,11 @@
                   <Font size="18.0" />
                </font>
             </Text>
+            <Label fx:id="targetPositionX" layoutX="91.0" layoutY="400.0" text="label" />
+            <Label fx:id="targetPositionY" layoutX="96.0" layoutY="472.0" text="Label" />
+            <Label fx:id="agentSpeed" layoutX="96.0" layoutY="522.0" text="Label" />
+            <Label fx:id="agentDetectionRange" layoutX="96.0" layoutY="595.0" text="Label" />
+            <Label fx:id="agentCommunicationRange" layoutX="96.0" layoutY="666.0" text="Label" />
          </children>
       </Pane>
     </children>
