@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 public class Target extends ObjectScheme{
 
     private int founded;
+    private int imageSize =100;
 
     public Target(Image image)
     {
@@ -18,8 +19,8 @@ public class Target extends ObjectScheme{
 
     @Override
     public void changePosition(float positionX, float positionY) {
-        this.positionX = positionX;
-        this.positionY = positionY;
+        this.positionX = positionX-(imageSize/2);
+        this.positionY = positionY-(imageSize/2);
     }
 
     @Override
