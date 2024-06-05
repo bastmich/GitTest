@@ -287,14 +287,16 @@ public class Agent extends ObjectScheme {
     }
 
     /**
-     * Calculates the angle needed to move towards another agent.
+     * Calculates the angle needed to move towards the goToPosition
      *
      * @return the angle to move towards the goToPosition
      */
     private float angleToGo() {
+        //Calcul the angle with the goTo position and the actual position
         float angle = (float) Math.atan((this.goToPosition[0] - this.positionX) / (this.goToPosition[1] - this.positionY));
         angle = Math.abs(angle);
         angle = (float) Math.toDegrees(angle);
+
 
         if (this.positionX < this.goToPosition[0]) {
             if (this.positionY < this.goToPosition[1]) {
@@ -345,6 +347,7 @@ public class Agent extends ObjectScheme {
      * @return true if the target is within the detection radius, false otherwise
      */
     public boolean checkTarget(Target target) {
+        //The target is detected if the distance between the agent and the target is smaller than the detection distance
         if (this.state == State.SEARCHING) {
             float distance = calculDistance(this.positionX, this.positionY, target.positionX, target.positionY);
             if (distance <= this.radiusDetection) {
@@ -363,6 +366,8 @@ public class Agent extends ObjectScheme {
      * @param agents the list of other agents
      */
     public void communication(ArrayList<Agent> agents) {
+        //The agent can communicate if the distance with another agent is smaller than the communication detection
+        //If the agent communicate, he goes to the other agent position
         if (this.state == State.FOUNDED || this.state == State.GOTO) {
             float distance;
             for (Agent agent : agents) {
