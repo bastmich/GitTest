@@ -125,23 +125,22 @@ public class Controller {
                 String[] parts = line.split(" ");
                 switch (parts[0]) {
                     case "target_position_x_y":
-                        targetPositionxFile = Integer.parseInt(parts[1]);
-                        targetPositionX.setText(Integer.toString(targetPositionxFile));
-                        targetPositionyFile = Integer.parseInt(parts[2]);
-                        targetPositionY.setText(Integer.toString(targetPositionyFile));
                         app.simController.target.changePosition((float)targetPositionxFile,(float)targetPositionyFile);
+                        targetPositionxFile = Integer.parseInt(parts[1]);
+                        targetPositionyFile = Integer.parseInt(parts[2]);
+
                         break;
                     case "agents_speed":
                         agentsSpeedFile = Double.parseDouble(parts[1]);
-                        agentSpeed.setText(Double.toString(agentsSpeedFile));
+
                         break;
                     case "agents_detection_range":
                         agentsDetectionRangeFile = Integer.parseInt(parts[1]);
-                        agentDetectionRange.setText(Integer.toString(agentsDetectionRangeFile));
+
                         break;
                     case "agents_communication_range":
                         agentsCommunicationRangeFile = Integer.parseInt(parts[1]);
-                        agentCommunicationRange.setText(Integer.toString(agentsCommunicationRangeFile));
+
                         break;
                 }
             }
@@ -158,9 +157,11 @@ public class Controller {
             app.simController.agents.get(i).setVelocity((float)agentsSpeedFile);
 
         }
-
-
-
+        targetPositionX.setText(Float.toString(app.simController.target.getPositionX()));
+        targetPositionY.setText(Float.toString(app.simController.target.getPositionY()));
+        agentSpeed.setText(Double.toString(app.simController.agents.get(0).getVelocity()));
+        agentDetectionRange.setText(Integer.toString(agentsDetectionRangeFile));
+        agentCommunicationRange.setText(Integer.toString(agentsCommunicationRangeFile));
     };
 
     @FXML

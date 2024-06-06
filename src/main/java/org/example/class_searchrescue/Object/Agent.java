@@ -136,6 +136,9 @@ public class Agent extends ObjectScheme {
     public void setVelocity(float velocity){
         this.velocityMagnitude=velocity;
     }
+    public float getVelocity(){
+        return this.velocityMagnitude;
+    }
 
     /**
      * Gets the current state of the agent.
