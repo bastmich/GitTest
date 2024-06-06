@@ -9,6 +9,7 @@
 
 <VBox alignment="TOP_CENTER" maxHeight="800.0" maxWidth="1200.0" minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0" spacing="0.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.class_searchrescue.App.SimController">
     <!-- StackPane to contain the canvas and rectangle -->
+
     <StackPane>
         <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_LEFT">
             <image>
@@ -28,28 +29,31 @@
         </StackPane>
          <!-- Controller -->
          <fx:include maxHeight="800.0" maxWidth="400.0" minHeight="800.0" minWidth="400.0" prefHeight="800.0" prefWidth="400.0" source="Controller.fxml" StackPane.alignment="TOP_RIGHT" />
+
         <Canvas fx:id="canvas" height="800.0" width="800.0" StackPane.alignment="TOP_LEFT" />
-        <HBox maxHeight="200.0" maxWidth="382.0" minHeight="200.0" minWidth="382.0" prefHeight="200.0" prefWidth="382.0" StackPane.alignment="BOTTOM_RIGHT">
-            <Label fx:id="LabelS" text="XX">
-                <font>
-                    <Font size="18.0" />
-                </font>
-            </Label>
-            <Text layoutX="15.0" layoutY="153.0" text=" s ">
-                <font>
-                    <Font size="18.0" />
-                </font>
-            </Text>
-            <Label fx:id="LabelMs" text="XX">
-                <font>
-                    <Font size="18.0" />
-                </font>
-            </Label>
-            <Text layoutX="15.0" layoutY="153.0" text=" ms ">
-                <font>
-                    <Font size="18.0" />
-                </font>
-            </Text>
-        </HBox>
+            <HBox maxHeight="100.0" maxWidth="382.0" minHeight="124.0" minWidth="382.0" prefHeight="124.0" prefWidth="382.0" StackPane.alignment="BOTTOM_RIGHT">
+
+                <Label fx:id="LabelS" text="XX">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Text layoutX="15.0" layoutY="153.0" text=" s ">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Text>
+                <Label fx:id="LabelMs" text="XX">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Text layoutX="15.0" layoutY="153.0" text=" ms ">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Text>
+            </HBox>
+
     </StackPane>
 </VBox>

@@ -1,7 +1,10 @@
 package org.example.class_searchrescue.App;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import org.example.class_searchrescue.Application;
@@ -40,7 +43,10 @@ public class Controller {
     @FXML Label agentSpeed;
     @FXML Label agentDetectionRange;
     @FXML Label agentCommunicationRange;
+    @FXML Label uploadState;
 
+    @FXML
+    Slider slider;
 
     @FXML Rectangle SquareMan;
     @FXML Rectangle SquareHelicopter;
@@ -52,10 +58,26 @@ public class Controller {
   SquareMan.setVisible(true);
   SquareHelicopter.setVisible(false);
   SquareDrone.setVisible(false);
-     System.out.println("controller");
+  slider.valueProperty().addListener(new ChangeListener<Number>() {
+      @Override
+      public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+          updateSlider((int) slider.getValue());
+      }
+  });
 
  }
-
+    private void updateSlider(int newValue)
+    {
+        if(!running ||SimController.actualNumberOfFound==SimController.numberOfFounded)
+        {
+            slider.adjustValue(newValue);
+            app.simController.numberOfAgents = newValue;
+        }
+        else
+        {
+            slider.adjustValue(app.simController.numberOfAgents);
+        }
+    }
 
     @FXML
     private void startSim(){
@@ -64,12 +86,18 @@ public class Controller {
          System.out.println("run");
 
          app.simController.startSim();
+         updateConfigLabel();
          running = true;
      }
      else if(SimController.actualNumberOfFound<SimController.numberOfFounded)
      {
          System.out.println("restart");
          app.simController.restartSim();
+         updateConfigLabel();
+     }
+     else
+     {
+         app.simController.resetSim();
      }
 
     };
@@ -99,7 +127,10 @@ public class Controller {
         }
 
         app.simController.resetSim();
+        updateConfigLabel();
     };
+
+
     @FXML
     private void loadConfig(){
 
@@ -144,6 +175,7 @@ public class Controller {
                         break;
                 }
             }
+            uploadState.setText("File uploaded successfully");
         } catch (IOException e) {
             System.out.println("Error : " + e.getMessage());
         }
@@ -152,16 +184,16 @@ public class Controller {
 
         for(int i=0;i<app.simController.agents.size();i++)
         {
+            System.out.println("set");
             app.simController.agents.get(i).changeRadiusCommunication((float)agentsCommunicationRangeFile);
             app.simController.agents.get(i).setRadiusDetection((float)agentsDetectionRangeFile);
             app.simController.agents.get(i).setVelocity((float)agentsSpeedFile);
 
         }
-        targetPositionX.setText(Float.toString(app.simController.target.getPositionX()));
-        targetPositionY.setText(Float.toString(app.simController.target.getPositionY()));
-        agentSpeed.setText(Double.toString(app.simController.agents.get(0).getVelocity()));
-        agentDetectionRange.setText(Integer.toString(agentsDetectionRangeFile));
-        agentCommunicationRange.setText(Integer.toString(agentsCommunicationRangeFile));
+        if(running)
+        {
+            updateConfigLabel();
+        }
     };
 
     @FXML
@@ -207,5 +239,14 @@ public class Controller {
             SquareDrone.setVisible(true);
 
     };
+
+    private void updateConfigLabel()
+    {
+        targetPositionX.setText(Float.toString(app.simController.target.getPositionX()+50));
+        targetPositionY.setText(Float.toString(app.simController.target.getPositionY()+50));
+        agentSpeed.setText(Double.toString(app.simController.agents.get(0).getVelocity()));
+        agentDetectionRange.setText(Float.toString(app.simController.agents.get(0).getRadiusDetection()));
+        agentCommunicationRange.setText(Float.toString(app.simController.agents.get(0).radiusCommunication()));
+    }
 
 }

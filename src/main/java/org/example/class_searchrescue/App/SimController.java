@@ -19,7 +19,7 @@ public class SimController {
     @FXML private Label LabelS;
     @FXML private Label LabelMs;
 
-    private int numberOfAgents =5;
+    static int numberOfAgents =5;
     static int numberOfFounded = 3;
     static int actualNumberOfFound;
 
