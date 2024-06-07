@@ -197,7 +197,7 @@ public class Agent extends ObjectScheme {
                 return position;
             case SEARCHING:
                 // Return the standard way
-                return Way();
+                return way();
             case FOUNDED:
                 // Stay at the same position
                 return position;
@@ -212,7 +212,7 @@ public class Agent extends ObjectScheme {
                     return position;
                 } else {
                     // Continue to go in the other agent's direction
-                    return Way();
+                    return way();
                 }
         }
         return new float[0];
@@ -223,7 +223,7 @@ public class Agent extends ObjectScheme {
      *
      * @return the new position of the agent
      */
-    private float[] Way() {
+    private float[] way() {
         float[] position = new float[2];
         float distanceToDo = this.incrementStep * this.velocityMagnitude;
         float deltaX;
