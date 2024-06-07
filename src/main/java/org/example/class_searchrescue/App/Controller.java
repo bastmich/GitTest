@@ -21,9 +21,9 @@ public class Controller {
 
 
 
-    private Image agentMan = new Image("human.png");
-    private Image agentHelicopter = new Image("helicopter.png");
-    private Image agentDrone = new Image("drone.png");
+    private Image agentMan = new Image(SimController.class.getResourceAsStream("/Image/Agent/human.png"));
+    private Image agentHelicopter = new Image(SimController.class.getResourceAsStream("/Image/Agent/helicopter.png"));
+    private Image agentDrone = new Image(SimController.class.getResourceAsStream("/Image/Agent/drone.png"));
     private Application app ;
 
     private int targetPositionxFile;

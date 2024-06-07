@@ -25,6 +25,7 @@ public class Agent extends ObjectScheme {
     enum State {
         SEARCHING,
         GOTO,
+        GOTOTARGET,
         FOUNDED,
         STANDBY
     }
@@ -37,6 +38,8 @@ public class Agent extends ObjectScheme {
 
     private float directionAngle;
     private float incrementStep = 1;
+
+
 
     /**
      * Constructs an Agent with the specified properties.
@@ -102,6 +105,7 @@ public class Agent extends ObjectScheme {
     public float[] getPosition() {
         return new float[]{this.positionX, this.positionY};
     }
+
 
     /**
      * Gets the communication radius of the agent.
@@ -328,6 +332,8 @@ public class Agent extends ObjectScheme {
         return calculDistance(this.positionX, this.positionY, goToPosition[0], goToPosition[1]) < distanceToDo;
     }
 
+
+
     /**
      * Calculates the distance between two points.
      *
@@ -377,7 +383,7 @@ public class Agent extends ObjectScheme {
                 distance = calculDistance(this.positionX, this.positionY, agent.positionX, agent.positionY);
                 if (distance <= this.radiusCommunication && agent.getState() == State.SEARCHING) {
                     if (this.state == State.FOUNDED) {
-                        agent.setGoToPosition(this.getPosition());
+                        agent.setGoToPosition(getPosition());
                     } else if (this.state == State.GOTO) {
                         agent.setGoToPosition(this.goToPosition);
                     }

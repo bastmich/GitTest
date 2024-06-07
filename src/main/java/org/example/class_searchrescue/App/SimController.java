@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import org.example.class_searchrescue.Object.Agent;
 import org.example.class_searchrescue.Object.Target;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class SimController {
@@ -27,11 +26,11 @@ public class SimController {
     private long stopTime =0;
     private long deltaStopTime=0;
 
-    private static Image targetImage = new Image("target.png");
-    static Image agentImage = new Image("human.png");
+    private static Image targetImage = new Image(SimController.class.getResourceAsStream("/Image/Agent/target.png"));
+    static Image agentImage = new Image(SimController.class.getResourceAsStream("/Image/Agent/human.png"));
 
-    private Image backImage = new Image("back1.jpg");
-    private Image foundImage = new Image("complete.png");
+    private Image backImage = new Image(SimController.class.getResourceAsStream("/Image/Background/back1.jpg"));
+    private Image foundImage = new Image(SimController.class.getResourceAsStream("/Image/Background/complete.png"));
 
     protected static ArrayList<Agent> agents = new ArrayList<>();
 

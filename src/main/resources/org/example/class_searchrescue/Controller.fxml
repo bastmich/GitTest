@@ -12,7 +12,7 @@
          <children>
             <ImageView fitHeight="800.0" fitWidth="400.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true" scaleY="3.0" scaleZ="0.0">
                <image>
-                  <Image url="@../../../back2.jpg" />
+                  <Image url="@../../../Image/Background/back2.jpg" />
                </image>
             </ImageView>
             <Rectangle fx:id="SquareMan1" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="56.0" layoutX="15.0" layoutY="73.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="59.0" />
@@ -39,17 +39,17 @@
             </Text>
             <ImageView fitHeight="56.0" fitWidth="49.0" layoutX="20.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../human.png" />
+                  <Image url="@../../../Image/Agent/human.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="56.0" fitWidth="49.0" layoutX="85.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../helicopter.png" />
+                  <Image url="@../../../Image/Agent/helicopter.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="56.0" fitWidth="49.0" layoutX="150.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../drone.png" />
+                  <Image url="@../../../Image/Agent/drone.png" />
                </image>
             </ImageView>
             <Button contentDisplay="GRAPHIC_ONLY" layoutX="80.0" layoutY="170.0" mnemonicParsing="false" onAction="#changeImageHelicopter" opacity="0.0" prefHeight="56.0" prefWidth="59.0" textFill="TRANSPARENT" />
@@ -57,17 +57,17 @@
             <Button contentDisplay="GRAPHIC_ONLY" layoutX="15.0" layoutY="170.0" mnemonicParsing="false" onAction="#changeImageMan" opacity="0.0" prefHeight="56.0" prefWidth="59.0" />
             <ImageView fitHeight="49.0" fitWidth="49.0" layoutX="17.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../start.png" />
+                  <Image url="@../../../Image/Button/start.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="90.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../ban-stop-icon-22.png" />
+                  <Image url="@../../../Image/Button/stop.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="155.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../6532052.png" />
+                  <Image url="@../../../Image/Button/restart.png" />
                </image>
             </ImageView>
             <Button contentDisplay="TOP" layoutX="17.0" layoutY="76.0" mnemonicParsing="false" onAction="#startSim" opacity="0.0" prefHeight="49.0" prefWidth="49.0" textFill="#0b0b0b" />
@@ -75,7 +75,7 @@
             <Button layoutX="85.0" layoutY="76.0" mnemonicParsing="false" onAction="#stopSim" opacity="0.0" prefHeight="49.0" prefWidth="49.0" />
             <ImageView fitHeight="49.0" fitWidth="59.0" layoutX="56.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../Files-PNG-File.png" />
+                  <Image url="@../../../Image/Button/file.png" />
                </image>
             </ImageView>
             <Button layoutX="15.0" layoutY="265.0" mnemonicParsing="false" onAction="#loadConfig" opacity="0.0" prefHeight="60.0" prefWidth="140.0" />

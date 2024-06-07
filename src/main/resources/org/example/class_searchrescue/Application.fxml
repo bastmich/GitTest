@@ -13,7 +13,7 @@
     <StackPane>
         <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_LEFT">
             <image>
-                <Image url="@../../../back1.jpg" />
+                <Image url="@../../../Image/Background/back1.jpg" />
             </image>
         </ImageView>
         <!-- Rectangle surrounding the canvas -->
