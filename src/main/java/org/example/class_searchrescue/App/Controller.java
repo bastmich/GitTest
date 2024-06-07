@@ -91,6 +91,8 @@ public class Controller {
      }
      else if(SimController.actualNumberOfFound<SimController.numberOfFounded)
      {
+         System.out.println(SimController.actualNumberOfFound);
+         System.out.println(SimController.numberOfFounded);
          System.out.println("restart");
          app.simController.restartSim();
          updateConfigLabel();

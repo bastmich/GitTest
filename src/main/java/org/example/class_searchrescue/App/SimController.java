@@ -24,6 +24,8 @@ public class SimController {
     static int actualNumberOfFound;
 
     private AnimationTimer animationTimer;
+    private long stopTime =0;
+    private long deltaStopTime=0;
 
     private static Image targetImage = new Image("target.png");
     static Image agentImage = new Image("human.png");
@@ -71,18 +73,21 @@ public class SimController {
 
     private void setupAnimationTimer() {
         System.out.println("run");
+
         animationTimer = new AnimationTimer() {
-            final long startNanoTime = System.nanoTime();
+            final long startNanoTime= System.nanoTime();
             @Override
             public void handle(long now) {
                 GraphicsContext gc = canvas.getGraphicsContext2D();
-                displayTime(calculTime(now-startNanoTime));
+                displayTime(calculTime(now-startNanoTime-deltaStopTime));
                 System.out.println(target.getFounded());
                 if(target.getFounded()>=numberOfFounded)
                 {
                     gc.drawImage(backImage,0,0);
                     gc.drawImage(foundImage, 150, 200);
                     animationTimer.stop();
+                    actualNumberOfFound = target.getFounded();
+                    System.out.println("founded");
                 }
                 else
                 {
@@ -139,9 +144,17 @@ public class SimController {
         LabelS.setText(String.valueOf(myTime[0]));
         LabelMs.setText(String.valueOf(myTime[1]));
     }
+    private void updateNumberOfFound()
+    {
+        numberOfFounded=(numberOfAgents/2)+1;
+        System.out.println("Number of found : "+numberOfFounded);
+    }
     public void startSim() {
         initializeAgent();
         initializeAnimationTimer();
+        deltaStopTime=0;
+        stopTime=0;
+        updateNumberOfFound();
         target.resetFounded();
         target.changeImage(targetImage);
         System.out.println(animationTimer);
@@ -152,6 +165,8 @@ public class SimController {
         }
     }
     public void restartSim(){
+        updateNumberOfFound();
+        deltaStopTime = System.nanoTime()-stopTime;
         if (animationTimer != null) {
             animationTimer.start();
         }
@@ -159,6 +174,7 @@ public class SimController {
 
     public void stopSim() {
         if (animationTimer != null) {
+            stopTime = System.nanoTime();
             animationTimer.stop();
         }
     }

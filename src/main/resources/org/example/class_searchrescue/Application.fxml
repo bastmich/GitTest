@@ -33,7 +33,7 @@
         <Canvas fx:id="canvas" height="800.0" width="800.0" StackPane.alignment="TOP_LEFT" />
             <HBox maxHeight="100.0" maxWidth="382.0" minHeight="124.0" minWidth="382.0" prefHeight="124.0" prefWidth="382.0" StackPane.alignment="BOTTOM_RIGHT">
 
-                <Label fx:id="LabelS" text="XX">
+                <Label fx:id="LabelS" text="00">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -43,7 +43,7 @@
                         <Font size="18.0" />
                     </font>
                 </Text>
-                <Label fx:id="LabelMs" text="XX">
+                <Label fx:id="LabelMs" text="00">
                     <font>
                         <Font size="18.0" />
                     </font>
