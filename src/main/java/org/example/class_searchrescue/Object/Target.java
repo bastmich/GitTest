@@ -1,11 +1,12 @@
 package org.example.class_searchrescue.Object;
 
 import javafx.scene.image.Image;
+
 /**
  * The Target class represents a target in the simulation.
  * The target has a position and can track how many times it has been found.
  */
-public class Target extends ObjectScheme{
+public class Target extends ObjectScheme {
 
     private int founded;
     private int imageSize = 100;

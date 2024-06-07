@@ -19,6 +19,7 @@ public class Agent extends ObjectScheme {
      * The State enum represents the possible states of an agent.
      * - SEARCHING: The agent is searching for the target.
      * - GOTO: The agent is moving towards a specific position.
+     * - GOTOTARGET: The agent is moving directly towards the target.
      * - FOUNDED: The agent has found the target.
      * - STANDBY: The agent is idle.
      */
@@ -38,8 +39,6 @@ public class Agent extends ObjectScheme {
 
     private float directionAngle;
     private float incrementStep = 1;
-
-
 
     /**
      * Constructs an Agent with the specified properties.
@@ -106,7 +105,6 @@ public class Agent extends ObjectScheme {
         return new float[]{this.positionX, this.positionY};
     }
 
-
     /**
      * Gets the communication radius of the agent.
      *
@@ -129,18 +127,27 @@ public class Agent extends ObjectScheme {
     /**
      * Sets the detection radius of the agent.
      *
+     * @param radius the new detection radius
      */
     public void setRadiusDetection(float radius) {
         this.radiusDetection = radius;
     }
+
     /**
      * Sets the velocity of the agent.
      *
+     * @param velocity the new velocity
      */
     public void setVelocity(float velocity){
-        this.velocityMagnitude=velocity;
+        this.velocityMagnitude = velocity;
     }
-    public float getVelocity(){
+
+    /**
+     * Gets the velocity of the agent.
+     *
+     * @return the current velocity
+     */
+    public float getVelocity() {
         return this.velocityMagnitude;
     }
 
@@ -183,28 +190,28 @@ public class Agent extends ObjectScheme {
     public float[] updatePosition(Target target) {
         float[] position = {this.positionX, this.positionY};
 
-        //Call different position method in function of the current state
+        // Call different position methods based on the current state
         switch (state) {
             case STANDBY:
-                //Stay at the same position
+                // Stay at the same position
                 return position;
             case SEARCHING:
-                //Return the standard way
+                // Return the standard way
                 return Way();
             case FOUNDED:
-                //Stay at the same position
+                // Stay at the same position
                 return position;
             case GOTO:
-                //Go in ther direction of the other agent
+                // Go in the direction of the other agent
                 this.directionAngle = angleToGo();
-                //Stop searching if the target is found
+                // Stop searching if the target is found
                 if (stopGoTo()) {
-                    //Target is found
+                    // Target is found
                     target.newFounded();
                     this.state = State.FOUNDED;
                     return position;
                 } else {
-                    //Continue to go in the other agent direction
+                    // Continue to go in the other agent's direction
                     return Way();
                 }
         }
@@ -221,10 +228,11 @@ public class Agent extends ObjectScheme {
         float distanceToDo = this.incrementStep * this.velocityMagnitude;
         float deltaX;
         float deltaY;
-        //The angle is changed is the agent goes into a wall
+
+        // Adjust the angle if the agent collides with a wall
         this.directionAngle = checkWallCollision(this.directionAngle);
 
-        //The new position is calculated in function of the direction's angle
+        // Calculate the new position based on the direction angle
         if (this.directionAngle >= 0 && this.directionAngle < 90) {
             deltaX = (float) (Math.cos(Math.toRadians(this.directionAngle)) * distanceToDo);
             deltaY = (float) (Math.sin(Math.toRadians(this.directionAngle)) * distanceToDo);
@@ -256,7 +264,7 @@ public class Agent extends ObjectScheme {
      * @return the new direction angle after collision adjustments
      */
     private float checkWallCollision(float angle) {
-        //If the agent goes into a wall the opposite angle is returned
+        // If the agent goes into a wall, return the opposite angle
         if (this.positionY + this.imageSize > this.maxWindowY || this.positionX + this.imageSize > this.maxWindowX || this.positionY < 0 || this.positionX < 0) {
             if (angle >= 0 && angle < 90) {
                 if ((this.positionX + this.imageSize) > this.maxWindowX) {
@@ -294,16 +302,15 @@ public class Agent extends ObjectScheme {
     }
 
     /**
-     * Calculates the angle needed to move towards the goToPosition
+     * Calculates the angle needed to move towards the goToPosition.
      *
      * @return the angle to move towards the goToPosition
      */
     private float angleToGo() {
-        //Calcul the angle with the goTo position and the actual position
+        // Calculate the angle with the goTo position and the actual position
         float angle = (float) Math.atan((this.goToPosition[0] - this.positionX) / (this.goToPosition[1] - this.positionY));
         angle = Math.abs(angle);
         angle = (float) Math.toDegrees(angle);
-
 
         if (this.positionX < this.goToPosition[0]) {
             if (this.positionY < this.goToPosition[1]) {
@@ -332,8 +339,6 @@ public class Agent extends ObjectScheme {
         return calculDistance(this.positionX, this.positionY, goToPosition[0], goToPosition[1]) < distanceToDo;
     }
 
-
-
     /**
      * Calculates the distance between two points.
      *
@@ -356,7 +361,7 @@ public class Agent extends ObjectScheme {
      * @return true if the target is within the detection radius, false otherwise
      */
     public boolean checkTarget(Target target) {
-        //The target is detected if the distance between the agent and the target is smaller than the detection distance
+        // The target is detected if the distance between the agent and the target is smaller than the detection distance
         if (this.state == State.SEARCHING) {
             float distance = calculDistance(this.positionX, this.positionY, target.positionX, target.positionY);
             if (distance <= this.radiusDetection) {
@@ -375,8 +380,8 @@ public class Agent extends ObjectScheme {
      * @param agents the list of other agents
      */
     public void communication(ArrayList<Agent> agents) {
-        //The agent can communicate if the distance with another agent is smaller than the communication detection
-        //If the agent communicate, he goes to the other agent position
+        // The agent can communicate if the distance with another agent is smaller than the communication detection
+        // If the agent communicates, it goes to the other agent's position
         if (this.state == State.FOUNDED || this.state == State.GOTO) {
             float distance;
             for (Agent agent : agents) {
