@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JFileChooser;
+import javafx.application.Platform;
 
 
 public class Controller {
@@ -45,8 +46,7 @@ public class Controller {
     @FXML Label agentCommunicationRange;
     @FXML Label uploadState;
 
-    @FXML
-    Slider slider;
+    @FXML Slider slider;
 
     @FXML Rectangle SquareMan;
     @FXML Rectangle SquareHelicopter;
@@ -81,6 +81,21 @@ public class Controller {
 
     @FXML
     private void startSim(){
+
+        if(SquareMan.isVisible())
+        {
+            SimController.agentImage =agentMan;
+        }
+        else if(SquareDrone.isVisible())
+        {
+            SimController.agentImage = agentDrone;
+        }
+        else if(SquareHelicopter.isVisible())
+        {
+            SimController.agentImage=agentHelicopter;
+        }
+
+
         System.out.println(running);
      if (!running && SimController.actualNumberOfFound<SimController.numberOfFounded) {
          System.out.println("run");
@@ -134,69 +149,73 @@ public class Controller {
 
 
     @FXML
-    private void loadConfig(){
-
-        //Open file browser and choose
+    private void loadConfig() {
+        // Ouvrir le sélecteur de fichiers
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int result = fileChooser.showOpenDialog(null);
-        File selectedFile = fileChooser.getSelectedFile();
 
-        File configFile = new File(selectedFile.getAbsolutePath());
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            File configFile = new File(selectedFile.getAbsolutePath());
 
-        // Check if file exist
-        if (!configFile.exists() || !configFile.isFile()) {
-            System.out.println("This file doesn't exist: " + selectedFile.getAbsolutePath());
-            return;
-        }
-
-        // Use BufferReader
-        try (BufferedReader br = new BufferedReader(new FileReader(configFile))) {
-            String line;
-            //Read file
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(" ");
-                switch (parts[0]) {
-                    case "target_position_x_y":
-                        app.simController.target.changePosition((float)targetPositionxFile,(float)targetPositionyFile);
-                        targetPositionxFile = Integer.parseInt(parts[1]);
-                        targetPositionyFile = Integer.parseInt(parts[2]);
-
-                        break;
-                    case "agents_speed":
-                        agentsSpeedFile = Double.parseDouble(parts[1]);
-
-                        break;
-                    case "agents_detection_range":
-                        agentsDetectionRangeFile = Integer.parseInt(parts[1]);
-
-                        break;
-                    case "agents_communication_range":
-                        agentsCommunicationRangeFile = Integer.parseInt(parts[1]);
-
-                        break;
-                }
+            // Vérifier si le fichier existe
+            if (!configFile.exists() || !configFile.isFile()) {
+                System.out.println("Ce fichier n'existe pas : " + selectedFile.getAbsolutePath());
+                return;
             }
-            uploadState.setText("File uploaded successfully");
-        } catch (IOException e) {
-            System.out.println("Error : " + e.getMessage());
-        }
 
-        //Update agents
+            // Utiliser BufferedReader
+            try (BufferedReader br = new BufferedReader(new FileReader(configFile))) {
+                String line;
+                // Lire le fichier
+                while ((line = br.readLine()) != null) {
+                    String[] parts = line.split(" ");
+                    switch (parts[0]) {
+                        case "target_position_x_y":
+                            targetPositionxFile = Integer.parseInt(parts[1]);
+                            targetPositionyFile = Integer.parseInt(parts[2]);
+                            Platform.runLater(() -> app.simController.target.changePosition((float) targetPositionxFile, (float) targetPositionyFile));
+                            break;
+                        case "agents_speed":
+                            agentsSpeedFile = Double.parseDouble(parts[1]);
+                            Platform.runLater(() -> {
+                                for (int i = 0; i < app.simController.agents.size(); i++) {
+                                    app.simController.agents.get(i).setVelocity((float) agentsSpeedFile);
+                                }
+                            });
+                            break;
+                        case "agents_detection_range":
+                            agentsDetectionRangeFile = Integer.parseInt(parts[1]);
+                            Platform.runLater(() -> {
+                                for (int i = 0; i < app.simController.agents.size(); i++) {
+                                    app.simController.agents.get(i).setRadiusDetection((float) agentsDetectionRangeFile);
+                                }
+                            });
+                            break;
+                        case "agents_communication_range":
+                            agentsCommunicationRangeFile = Integer.parseInt(parts[1]);
+                            Platform.runLater(() -> {
+                                for (int i = 0; i < app.simController.agents.size(); i++) {
+                                    app.simController.agents.get(i).changeRadiusCommunication((float) agentsCommunicationRangeFile);
+                                }
+                            });
+                            break;
+                    }
+                }
+                Platform.runLater(() -> uploadState.setText("File uploaded successfully"));
+            } catch (IOException e) {
+                System.out.println("Erreur lors de la lecture du fichier de configuration : " + e.getMessage());
+            }
 
-        for(int i=0;i<app.simController.agents.size();i++)
-        {
-            System.out.println("set");
-            app.simController.agents.get(i).changeRadiusCommunication((float)agentsCommunicationRangeFile);
-            app.simController.agents.get(i).setRadiusDetection((float)agentsDetectionRangeFile);
-            app.simController.agents.get(i).setVelocity((float)agentsSpeedFile);
-
+            // Appeler updateConfigLabel sur le thread JavaFX
+            if (running) {
+                Platform.runLater(this::updateConfigLabel);
+            }
+        } else {
+            System.out.println("Aucun fichier sélectionné.");
         }
-        if(running)
-        {
-            updateConfigLabel();
-        }
-    };
+    }
 
     @FXML
     private void changeImageMan(){
@@ -249,6 +268,7 @@ public class Controller {
         agentSpeed.setText(Double.toString(app.simController.agents.get(0).getVelocity()));
         agentDetectionRange.setText(Float.toString(app.simController.agents.get(0).getRadiusDetection()));
         agentCommunicationRange.setText(Float.toString(app.simController.agents.get(0).radiusCommunication()));
+
     }
 
 }
