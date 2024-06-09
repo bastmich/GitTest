@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JFileChooser;
-import javafx.application.Platform;
+
 
 
 public class Controller {
@@ -117,6 +117,8 @@ public class Controller {
          app.simController.resetSim();
      }
 
+        updateSimData();
+
     };
     @FXML
     private void stopSim(){
@@ -175,43 +177,25 @@ public class Controller {
                         case "target_position_x_y":
                             targetPositionxFile = Integer.parseInt(parts[1]);
                             targetPositionyFile = Integer.parseInt(parts[2]);
-                            Platform.runLater(() -> app.simController.target.changePosition((float) targetPositionxFile, (float) targetPositionyFile));
                             break;
                         case "agents_speed":
-                            agentsSpeedFile = Double.parseDouble(parts[1]);
-                            Platform.runLater(() -> {
-                                for (int i = 0; i < app.simController.agents.size(); i++) {
-                                    app.simController.agents.get(i).setVelocity((float) agentsSpeedFile);
-                                }
-                            });
+                            agentsSpeedFile = Float.parseFloat(parts[1]);
                             break;
                         case "agents_detection_range":
                             agentsDetectionRangeFile = Integer.parseInt(parts[1]);
-                            Platform.runLater(() -> {
-                                for (int i = 0; i < app.simController.agents.size(); i++) {
-                                    app.simController.agents.get(i).setRadiusDetection((float) agentsDetectionRangeFile);
-                                }
-                            });
                             break;
                         case "agents_communication_range":
                             agentsCommunicationRangeFile = Integer.parseInt(parts[1]);
-                            Platform.runLater(() -> {
-                                for (int i = 0; i < app.simController.agents.size(); i++) {
-                                    app.simController.agents.get(i).changeRadiusCommunication((float) agentsCommunicationRangeFile);
-                                }
-                            });
                             break;
                     }
                 }
-                Platform.runLater(() -> uploadState.setText("File uploaded successfully"));
+                uploadState.setText("File uploaded successfully");
+                updateConfigLabel();
+
             } catch (IOException e) {
                 System.out.println("Erreur lors de la lecture du fichier de configuration : " + e.getMessage());
             }
 
-            // Appeler updateConfigLabel sur le thread JavaFX
-            if (running) {
-                Platform.runLater(this::updateConfigLabel);
-            }
         } else {
             System.out.println("Aucun fichier sélectionné.");
         }
@@ -265,9 +249,22 @@ public class Controller {
     {
         targetPositionX.setText(Float.toString(app.simController.target.getPositionX()+50));
         targetPositionY.setText(Float.toString(app.simController.target.getPositionY()+50));
-        agentSpeed.setText(Double.toString(app.simController.agents.get(0).getVelocity()));
+        agentSpeed.setText(Float.toString(app.simController.agents.get(0).getVelocity()));
         agentDetectionRange.setText(Float.toString(app.simController.agents.get(0).getRadiusDetection()));
         agentCommunicationRange.setText(Float.toString(app.simController.agents.get(0).radiusCommunication()));
+
+    }
+
+    private void updateSimData()
+    {
+        app.simController.target.changePosition((float)targetPositionxFile,(float)targetPositionxFile);
+        for(int i=0;i<app.simController.agents.size();i++) {
+            app.simController.agents.get(i).changeRadiusCommunication(agentsCommunicationRangeFile);
+            app.simController.agents.get(i).setVelocity((float)agentsSpeedFile);
+            app.simController.agents.get(i).setRadiusDetection(agentsDetectionRangeFile);
+
+        }
+
 
     }
 
