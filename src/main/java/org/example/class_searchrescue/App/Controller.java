@@ -29,9 +29,11 @@ public class Controller {
 
     private int targetPositionxFile;
     private int targetPositionyFile;
-    private double agentsSpeedFile;
+    private float agentsSpeedFile;
     private int agentsDetectionRangeFile;
     private int agentsCommunicationRangeFile;
+
+    private boolean newDatas = false;
 
     public Controller(Application app) {
         this.app = app;
@@ -117,7 +119,10 @@ public class Controller {
          app.simController.resetSim();
      }
 
-        updateSimData();
+     if (newDatas){
+         updateSimData();
+         newDatas = false;
+     }
 
     };
     @FXML
@@ -190,7 +195,13 @@ public class Controller {
                     }
                 }
                 uploadState.setText("File uploaded successfully");
-                updateConfigLabel();
+                //updateConfigLabel();
+                newDatas = true;
+                /*targetPositionX.setText(Float.toString(targetPositionxFile));
+                targetPositionY.setText(Float.toString(targetPositionyFile));
+                agentSpeed.setText(Float.toString(agentsSpeedFile));
+                agentDetectionRange.setText(Float.toString(agentsDetectionRangeFile));
+                agentCommunicationRange.setText(Float.toString(agentsCommunicationRangeFile));*/
 
             } catch (IOException e) {
                 System.out.println("Erreur lors de la lecture du fichier de configuration : " + e.getMessage());
@@ -260,7 +271,7 @@ public class Controller {
         app.simController.target.changePosition((float)targetPositionxFile,(float)targetPositionxFile);
         for(int i=0;i<app.simController.agents.size();i++) {
             app.simController.agents.get(i).changeRadiusCommunication(agentsCommunicationRangeFile);
-            app.simController.agents.get(i).setVelocity((float)agentsSpeedFile);
+            app.simController.agents.get(i).setVelocity(agentsSpeedFile);
             app.simController.agents.get(i).setRadiusDetection(agentsDetectionRangeFile);
 
         }
