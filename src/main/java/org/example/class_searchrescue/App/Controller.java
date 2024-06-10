@@ -114,14 +114,14 @@ public class Controller {
          Application.simController.resetSim();
      }
 
-    };
+    }
     @FXML
     private void stopSim(){
         if (running) {
             pause = true;
             Application.simController.stopSim();
         }
-    };
+    }
 
     @FXML
     private void resetSim(){
@@ -142,7 +142,7 @@ public class Controller {
 
         Application.simController.resetSim();
         updateConfigLabel();
-    };
+    }
 
 
     @FXML
@@ -221,7 +221,7 @@ public class Controller {
             SquareHelicopter.setVisible(false);
             SquareDrone.setVisible(false);
 
-    };
+    }
     @FXML
     private void changeImageHelicopter(){
      for(int i=0;i<SimController.agents.size();i++)
@@ -234,7 +234,7 @@ public class Controller {
             SquareHelicopter.setVisible(true);
             SquareDrone.setVisible(false);
 
-    };
+    }
     @FXML
     private void changeImageDrone(){
      for(int i=0;i<SimController.agents.size();i++)
@@ -248,15 +248,15 @@ public class Controller {
             SquareHelicopter.setVisible(false);
             SquareDrone.setVisible(true);
 
-    };
+    }
 
     private void updateConfigLabel()
     {
         targetPositionX.setText(Float.toString(SimController.target.getPositionX()+50));
         targetPositionY.setText(Float.toString(SimController.target.getPositionY()+50));
-        agentSpeed.setText(Float.toString(SimController.agents.get(0).getVelocity()));
-        agentDetectionRange.setText(Float.toString(SimController.agents.get(0).getRadiusDetection()));
-        agentCommunicationRange.setText(Float.toString(SimController.agents.get(0).radiusCommunication()));
+        agentSpeed.setText(Float.toString(SimController.agents.getFirst().getVelocity()));
+        agentDetectionRange.setText(Float.toString(SimController.agents.getFirst().getRadiusDetection()));
+        agentCommunicationRange.setText(Float.toString(SimController.agents.getFirst().radiusCommunication()));
 
     }
 
