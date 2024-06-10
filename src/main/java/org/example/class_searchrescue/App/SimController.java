@@ -1,6 +1,7 @@
 package org.example.class_searchrescue.App;
 
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -23,9 +24,9 @@ public class SimController {
     @FXML
     private Label LabelMs;  // Label to display milliseconds
 
-    static int numberOfAgents = 5;  // Number of agents in the simulation
-    static int numberOfFounded = 3;  // Number of targets to find to complete the simulation
-    static int actualNumberOfFound;  // Number of targets found
+    static protected int numberOfAgents = 5;  // Number of agents in the simulation
+    static protected int numberOfFounded = 3;  // Number of targets to find to complete the simulation
+    static protected int actualNumberOfFound;  // Number of targets found
 
     private AnimationTimer animationTimer;  // Timer for animation
     private long stopTime = 0;  // Time when animation was stopped
@@ -36,6 +37,16 @@ public class SimController {
     static Image agentImage = new Image(SimController.class.getResourceAsStream("/Image/Agent/human.png"));
     private Image backImage = new Image(SimController.class.getResourceAsStream("/Image/Background/back1.jpg"));
     private Image foundImage = new Image(SimController.class.getResourceAsStream("/Image/Background/complete.png"));
+
+    private float agentVelocityDefault = 10.0f;
+    private float agentDetectionRadiusDefault = 50.0f;
+    private float agentCommunicationRadiusDefault = 100.0f;
+
+    private float agentVelocityConfig;
+    private float agentDetectionRadiusConfig;
+    private float agentCommunicationRadiusConfig;
+
+    static boolean isInitialized = false;
 
     protected static ArrayList<Agent> agents = new ArrayList<>();  // List of agents
 
@@ -52,22 +63,23 @@ public class SimController {
      */
     @FXML
     private void initialize() {
+        System.out.println("Initialize controller ...");
         initializeAnimationTimer();
         target.changePosition(400, 400);
-        System.out.println("initialized");
-        System.out.println(animationTimer);
+        System.out.println("Controller initialized");
         System.out.println(canvas);
-    }
+        }
 
     /**
      * Initializes the animation timer. Sets up the timer if the canvas is available.
      */
     private void initializeAnimationTimer() {
+        System.out.println("Initialize animation timer ...");
         // Call setupAnimationTimer after canvas is injected
-        System.out.println(canvas);
         if (canvas != null) {
             setupAnimationTimer();
         }
+        System.out.println("Animation timer initialized");
     }
 
     /**
@@ -75,16 +87,32 @@ public class SimController {
      */
     private void initializeAgent() {
         agents.clear();
-        for (int i = 0; i < this.numberOfAgents; i++) {
-            agents.add(new Agent(50, 100, 10, agentImage, (float) canvas.getWidth(), (float) canvas.getHeight()));
+        System.out.println("Initialize agents ...");
+        if (isInitialized)
+        {
+            System.out.println("config");
+            for (int i = 0; i < numberOfAgents; i++) {
+                agents.add(new Agent(agentDetectionRadiusConfig, agentCommunicationRadiusConfig, agentVelocityConfig, agentImage, (float) this.canvas.getWidth(), (float) this.canvas.getHeight()));
+            }
         }
+        else
+        {
+            System.out.println("default");
+            System.out.println(numberOfAgents);
+            for (int i = 0; i < numberOfAgents; i++) {
+                System.out.println("+1");
+                System.out.println(canvas);
+                agents.add(new Agent(agentDetectionRadiusDefault, agentCommunicationRadiusDefault, agentVelocityDefault, agentImage,(float) this.canvas.getWidth(), (float) this.canvas.getHeight()));
+                }
+        }
+        System.out.println("Agents initialized");
     }
 
     /**
      * Sets up the animation timer and handles the animation logic.
      */
     private void setupAnimationTimer() {
-        System.out.println("run");
+        System.out.println("Setup animation timer");
 
         animationTimer = new AnimationTimer() {
             final long startNanoTime = System.nanoTime();
@@ -168,11 +196,32 @@ public class SimController {
         numberOfFounded = (numberOfAgents / 2) + 1;
         System.out.println("Number of found : " + numberOfFounded);
     }
+    /**
+     * Updates the variable of the configuration files
+     */
+    public void updateCongigFile(float velocity,float communicationRadius, float detectionRadius, float targetX, float targetY)
+    {
+        this.agentVelocityConfig = velocity;
+        this.agentCommunicationRadiusConfig = communicationRadius;
+        this.agentDetectionRadiusConfig = detectionRadius;
+        target.changePosition(targetX,targetY);
+        for(int i=0;i<agents.size();i++)
+        {
+            agents.get(i).setVelocity(velocity);
+            agents.get(i).changeRadiusCommunication(communicationRadius);
+            agents.get(i).setRadiusDetection(detectionRadius);
+        }
+        isInitialized=true;
+    }
 
     /**
      * Starts the simulation.
      */
-    public void startSim() {
+    protected void startSim() {
+
+
+        System.out.println("start...");
+        System.out.println(this.canvas);
         initializeAgent();
         initializeAnimationTimer();
         deltaStopTime = 0;
@@ -190,7 +239,7 @@ public class SimController {
     /**
      * Restarts the simulation from the last stopped time.
      */
-    public void restartSim() {
+    protected void restartSim() {
         updateNumberOfFound();
         deltaStopTime = System.nanoTime() - stopTime;
         if (animationTimer != null) {
@@ -201,7 +250,7 @@ public class SimController {
     /**
      * Stops the simulation.
      */
-    public void stopSim() {
+    protected void stopSim() {
         if (animationTimer != null) {
             stopTime = System.nanoTime();
             animationTimer.stop();
@@ -211,7 +260,7 @@ public class SimController {
     /**
      * Resets and restarts the simulation.
      */
-    public void resetSim() {
+    protected void resetSim() {
         stopSim();
         startSim();
     }

@@ -19,13 +19,14 @@ import javax.swing.JFileChooser;
 public class Controller {
 
    private boolean running = false;
+   private boolean pause = false;
 
 
 
     private Image agentMan = new Image(SimController.class.getResourceAsStream("/Image/Agent/human.png"));
     private Image agentHelicopter = new Image(SimController.class.getResourceAsStream("/Image/Agent/helicopter.png"));
     private Image agentDrone = new Image(SimController.class.getResourceAsStream("/Image/Agent/drone.png"));
-    private Application app ;
+
 
     private int targetPositionxFile;
     private int targetPositionyFile;
@@ -33,12 +34,6 @@ public class Controller {
     private int agentsDetectionRangeFile;
     private int agentsCommunicationRangeFile;
 
-    private boolean newDatas = false;
-
-    public Controller(Application app) {
-        this.app = app;
-    }
-    public Controller(){}
 
 
     @FXML Label targetPositionX;
@@ -70,14 +65,14 @@ public class Controller {
  }
     private void updateSlider(int newValue)
     {
-        if(!running ||SimController.actualNumberOfFound==SimController.numberOfFounded)
+        if(!running ||SimController.actualNumberOfFound== SimController.numberOfFounded)
         {
             slider.adjustValue(newValue);
-            app.simController.numberOfAgents = newValue;
+            SimController.numberOfAgents = newValue;
         }
         else
         {
-            slider.adjustValue(app.simController.numberOfAgents);
+            slider.adjustValue(SimController.numberOfAgents);
         }
     }
 
@@ -98,38 +93,33 @@ public class Controller {
         }
 
 
-        System.out.println(running);
-     if (!running && SimController.actualNumberOfFound<SimController.numberOfFounded) {
-         System.out.println("run");
 
-         app.simController.startSim();
+     if (!running && SimController.actualNumberOfFound<SimController.numberOfFounded) {
+
+         Application.simController.startSim();
          updateConfigLabel();
          running = true;
      }
-     else if(SimController.actualNumberOfFound<SimController.numberOfFounded)
+     else if(pause && SimController.actualNumberOfFound<SimController.numberOfFounded)
      {
          System.out.println(SimController.actualNumberOfFound);
          System.out.println(SimController.numberOfFounded);
          System.out.println("restart");
-         app.simController.restartSim();
+         Application.simController.restartSim();
+         pause = false;
          updateConfigLabel();
      }
-     else
+     else if (SimController.actualNumberOfFound==SimController.numberOfFounded)
      {
-         app.simController.resetSim();
-     }
-
-     if (newDatas){
-         updateSimData();
-         newDatas = false;
+         Application.simController.resetSim();
      }
 
     };
     @FXML
     private void stopSim(){
         if (running) {
-
-            app.simController.stopSim();
+            pause = true;
+            Application.simController.stopSim();
         }
     };
 
@@ -150,7 +140,7 @@ public class Controller {
             SimController.agentImage=agentHelicopter;
         }
 
-        app.simController.resetSim();
+        Application.simController.resetSim();
         updateConfigLabel();
     };
 
@@ -195,13 +185,17 @@ public class Controller {
                     }
                 }
                 uploadState.setText("File uploaded successfully");
-                //updateConfigLabel();
-                newDatas = true;
-                /*targetPositionX.setText(Float.toString(targetPositionxFile));
-                targetPositionY.setText(Float.toString(targetPositionyFile));
-                agentSpeed.setText(Float.toString(agentsSpeedFile));
-                agentDetectionRange.setText(Float.toString(agentsDetectionRangeFile));
-                agentCommunicationRange.setText(Float.toString(agentsCommunicationRangeFile));*/
+                Application.simController.updateCongigFile(agentsSpeedFile,agentsCommunicationRangeFile,agentsDetectionRangeFile,targetPositionxFile,targetPositionyFile);
+                updateConfigLabel();
+                if (!SimController.isInitialized)
+                {
+                    agentSpeed.setText(Float.toString(agentsSpeedFile));
+                    agentDetectionRange.setText(Float.toString(agentsDetectionRangeFile));
+                    agentCommunicationRange.setText(Float.toString(agentsCommunicationRangeFile));
+                }
+
+
+
 
             } catch (IOException e) {
                 System.out.println("Erreur lors de la lecture du fichier de configuration : " + e.getMessage());
@@ -215,9 +209,9 @@ public class Controller {
     @FXML
     private void changeImageMan(){
 
-     for(int i=0;i<app.simController.agents.size();i++)
+     for(int i=0;i<SimController.agents.size();i++)
      {
-       app.simController.agents.get(i).changeImage(agentMan);
+       SimController.agents.get(i).changeImage(agentMan);
      }
      System.out.println("man");
 
@@ -230,9 +224,9 @@ public class Controller {
     };
     @FXML
     private void changeImageHelicopter(){
-     for(int i=0;i<app.simController.agents.size();i++)
+     for(int i=0;i<SimController.agents.size();i++)
      {
-      app.simController.agents.get(i).changeImage(agentHelicopter);
+      SimController.agents.get(i).changeImage(agentHelicopter);
      }
      //Visibility management
 
@@ -243,9 +237,9 @@ public class Controller {
     };
     @FXML
     private void changeImageDrone(){
-     for(int i=0;i<app.simController.agents.size();i++)
+     for(int i=0;i<SimController.agents.size();i++)
      {
-      app.simController.agents.get(i).changeImage(agentDrone);
+      SimController.agents.get(i).changeImage(agentDrone);
      }
 
      //Visibility management
@@ -258,25 +252,14 @@ public class Controller {
 
     private void updateConfigLabel()
     {
-        targetPositionX.setText(Float.toString(app.simController.target.getPositionX()+50));
-        targetPositionY.setText(Float.toString(app.simController.target.getPositionY()+50));
-        agentSpeed.setText(Float.toString(app.simController.agents.get(0).getVelocity()));
-        agentDetectionRange.setText(Float.toString(app.simController.agents.get(0).getRadiusDetection()));
-        agentCommunicationRange.setText(Float.toString(app.simController.agents.get(0).radiusCommunication()));
+        targetPositionX.setText(Float.toString(SimController.target.getPositionX()+50));
+        targetPositionY.setText(Float.toString(SimController.target.getPositionY()+50));
+        agentSpeed.setText(Float.toString(SimController.agents.get(0).getVelocity()));
+        agentDetectionRange.setText(Float.toString(SimController.agents.get(0).getRadiusDetection()));
+        agentCommunicationRange.setText(Float.toString(SimController.agents.get(0).radiusCommunication()));
 
     }
 
-    private void updateSimData()
-    {
-        app.simController.target.changePosition((float)targetPositionxFile,(float)targetPositionxFile);
-        for(int i=0;i<app.simController.agents.size();i++) {
-            app.simController.agents.get(i).changeRadiusCommunication(agentsCommunicationRangeFile);
-            app.simController.agents.get(i).setVelocity(agentsSpeedFile);
-            app.simController.agents.get(i).setRadiusDetection(agentsDetectionRangeFile);
 
-        }
-
-
-    }
 
 }
