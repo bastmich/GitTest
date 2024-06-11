@@ -68,6 +68,9 @@ public class SimController {
         target.changePosition(400, 400);
         System.out.println("Controller initialized");
         System.out.println(canvas);
+        agentVelocityConfig=agentVelocityDefault;
+        agentDetectionRadiusConfig=agentDetectionRadiusDefault;
+        agentCommunicationRadiusConfig=agentCommunicationRadiusDefault;
         }
 
     /**
