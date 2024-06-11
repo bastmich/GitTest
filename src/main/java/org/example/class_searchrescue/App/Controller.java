@@ -204,12 +204,7 @@ public class Controller {
                 uploadState.setText("File uploaded successfully");
                 Application.simController.updateCongigFile(agentsSpeedFile,agentsCommunicationRangeFile,agentsDetectionRangeFile,targetPositionxFile,targetPositionyFile);
                 updateConfigLabel();
-                if (!SimController.isInitialized)
-                {
-                    agentSpeed.setText(Float.toString(agentsSpeedFile));
-                    agentDetectionRange.setText(Float.toString(agentsDetectionRangeFile));
-                    agentCommunicationRange.setText(Float.toString(agentsCommunicationRangeFile));
-                }
+
 
             } catch (IOException e) {
                 System.out.println("Erreur lors de la lecture du fichier de configuration : " + e.getMessage());
@@ -270,10 +265,10 @@ public class Controller {
      */
     private void updateConfigLabel()
     {
-        targetPositionX.setText(Float.toString(SimController.target.getPositionX()+50));
-        targetPositionY.setText(Float.toString(SimController.target.getPositionY()+50));
-        agentSpeed.setText(Float.toString(SimController.agents.getFirst().getVelocity()));
-        agentDetectionRange.setText(Float.toString(SimController.agents.getFirst().getRadiusDetection()));
-        agentCommunicationRange.setText(Float.toString(SimController.agents.getFirst().radiusCommunication()));
+            targetPositionX.setText(Float.toString(SimController.target.getPositionX()+50));
+            targetPositionY.setText(Float.toString(SimController.target.getPositionY()+50));
+            agentSpeed.setText(Float.toString(SimController.agentVelocityConfig));
+            agentDetectionRange.setText(Float.toString(SimController.agentDetectionRadiusConfig));
+            agentCommunicationRange.setText(Float.toString(SimController.agentCommunicationRadiusConfig));
     }
 }

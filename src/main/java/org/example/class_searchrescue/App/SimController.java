@@ -42,9 +42,9 @@ public class SimController {
     private float agentDetectionRadiusDefault = 50.0f;
     private float agentCommunicationRadiusDefault = 100.0f;
 
-    private float agentVelocityConfig;
-    private float agentDetectionRadiusConfig;
-    private float agentCommunicationRadiusConfig;
+    static float agentVelocityConfig;
+    static float agentDetectionRadiusConfig;
+    static float agentCommunicationRadiusConfig;
 
     static boolean isInitialized = false;
 
