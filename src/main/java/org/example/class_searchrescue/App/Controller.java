@@ -30,11 +30,11 @@ public class Controller {
     private Image agentDrone = new Image(SimController.class.getResourceAsStream("/Image/Agent/drone.png"));
 
     // Variables for configuration file parameters
-    private int targetPositionxFile;
-    private int targetPositionyFile;
+    private float targetPositionxFile;
+    private float targetPositionyFile;
     private float agentsSpeedFile;
-    private int agentsDetectionRangeFile;
-    private int agentsCommunicationRangeFile;
+    private float agentsDetectionRangeFile;
+    private float agentsCommunicationRangeFile;
 
     // FXML annotated user interface components
     @FXML Label targetPositionX;
@@ -186,17 +186,17 @@ public class Controller {
                     String[] parts = line.split(" ");
                     switch (parts[0]) {
                         case "target_position_x_y":
-                            targetPositionxFile = Integer.parseInt(parts[1]);
-                            targetPositionyFile = Integer.parseInt(parts[2]);
+                            targetPositionxFile = Float.parseFloat(parts[1]);
+                            targetPositionyFile = Float.parseFloat(parts[2]);
                             break;
                         case "agents_speed":
                             agentsSpeedFile = Float.parseFloat(parts[1]);
                             break;
                         case "agents_detection_range":
-                            agentsDetectionRangeFile = Integer.parseInt(parts[1]);
+                            agentsDetectionRangeFile = Float.parseFloat(parts[1]);
                             break;
                         case "agents_communication_range":
-                            agentsCommunicationRangeFile = Integer.parseInt(parts[1]);
+                            agentsCommunicationRangeFile = Float.parseFloat(parts[1]);
                             break;
                     }
                 }
