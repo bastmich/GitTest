@@ -42,6 +42,7 @@ public class Controller {
     @FXML Label agentSpeed;
     @FXML Label agentDetectionRange;
     @FXML Label agentCommunicationRange;
+    @FXML Label timeout;
     @FXML Label uploadState;
     @FXML Slider slider;
     @FXML Rectangle SquareMan;
@@ -265,10 +266,11 @@ public class Controller {
      */
     private void updateConfigLabel()
     {
-            targetPositionX.setText(Float.toString(SimController.target.getPositionX()+50));
-            targetPositionY.setText(Float.toString(SimController.target.getPositionY()+50));
-            agentSpeed.setText(Float.toString(SimController.agentVelocityConfig));
-            agentDetectionRange.setText(Float.toString(SimController.agentDetectionRadiusConfig));
-            agentCommunicationRange.setText(Float.toString(SimController.agentCommunicationRadiusConfig));
+            targetPositionX.setText(Float.toString(SimController.target.getPositionX()+50)+"  px");
+            targetPositionY.setText(Float.toString(SimController.target.getPositionY()+50)+"  px");
+            agentSpeed.setText(Float.toString(SimController.agentVelocityConfig)+"  px/frame");
+            agentDetectionRange.setText(Float.toString(SimController.agentDetectionRadiusConfig)+"  px");
+            agentCommunicationRange.setText(Float.toString(SimController.agentCommunicationRadiusConfig)+"  px");
+            timeout.setText(Long.toString(SimController.timeoutTime/1000000000L)+"  s");
     }
 }

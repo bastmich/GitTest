@@ -29,7 +29,7 @@
         </StackPane>
          <!-- Controller -->
          <fx:include maxHeight="800.0" maxWidth="400.0" minHeight="800.0" minWidth="400.0" prefHeight="800.0" prefWidth="400.0" source="Controller.fxml" StackPane.alignment="TOP_RIGHT" />
-            <HBox maxHeight="100.0" maxWidth="382.0" minHeight="124.0" minWidth="382.0" prefHeight="124.0" prefWidth="382.0" StackPane.alignment="BOTTOM_RIGHT">
+            <HBox maxHeight="30.0" maxWidth="382.0" minHeight="100.0" minWidth="382.0" prefHeight="30.0" prefWidth="382.0" StackPane.alignment="BOTTOM_RIGHT">
 
                 <Label fx:id="LabelS" text="00">
                     <font>

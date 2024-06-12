@@ -84,11 +84,12 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Label fx:id="targetPositionX" layoutX="210.0" layoutY="386.0" text="No data (Default value = 400)" />
-            <Label fx:id="targetPositionY" layoutX="210.0" layoutY="416.0" text="No data (Default value = 400)" />
-            <Label fx:id="agentSpeed" layoutX="210.0" layoutY="446.0" text="No data (Default value = 10)" />
-            <Label fx:id="agentDetectionRange" layoutX="210.0" layoutY="476.0" text="No data (Default value = 50)" />
-            <Label fx:id="agentCommunicationRange" layoutX="210.0" layoutY="506.0" text="No data (Default value = 100)" />
+            <Label fx:id="targetPositionX" layoutX="210.0" layoutY="386.0" text="(Default value = 400 px)" />
+            <Label fx:id="targetPositionY" layoutX="210.0" layoutY="416.0" text="(Default value = 400 px)" />
+            <Label fx:id="agentSpeed" layoutX="210.0" layoutY="446.0" text="(Default value = 10 px/frame)" />
+            <Label fx:id="agentDetectionRange" layoutX="210.0" layoutY="476.0" text="(Default value = 50 px)" />
+            <Label fx:id="agentCommunicationRange" layoutX="210.0" layoutY="506.0" text="(Default value = 100 px)" />
+            <Label fx:id="timeout" layoutX="210.0" layoutY="536.0" text="(Default value = 60 s)" />
             <Text layoutX="15.0" layoutY="359.0" text="Actual informations :" wrappingWidth="241.36131286621094">
                <font>
                   <Font size="18.0" />
@@ -119,7 +120,12 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text layoutX="18.0" layoutY="665.0" text="Simulation timer :" wrappingWidth="241.36131286621094">
+            <Text layoutX="15.0" layoutY="550.0" text="Timeout :" wrappingWidth="194.36131286621094">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="18.0" layoutY="690.0" text="Simulation timer :" wrappingWidth="241.36131286621094">
                <font>
                   <Font size="18.0" />
                </font>
@@ -129,8 +135,8 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Slider fx:id="slider" blockIncrement="1.0" layoutX="124.0" layoutY="595.0" majorTickUnit="1.0" max="5.0" min="2.0" minorTickCount="1" prefHeight="17.0" prefWidth="140.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
-            <Text layoutX="13.0" layoutY="575.0" text="Number of agents :" wrappingWidth="241.36131286621094">
+            <Slider fx:id="slider" blockIncrement="1.0" layoutX="124.0" layoutY="626.0" majorTickUnit="1.0" max="5.0" min="2.0" minorTickCount="1" prefHeight="17.0" prefWidth="140.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <Text layoutX="13.0" layoutY="606.0" text="Number of agents :" wrappingWidth="241.36131286621094">
                <font>
                   <Font size="18.0" />
                </font>

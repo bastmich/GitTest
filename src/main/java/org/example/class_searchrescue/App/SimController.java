@@ -31,12 +31,16 @@ public class SimController {
     private AnimationTimer animationTimer;  // Timer for animation
     private long stopTime = 0;  // Time when animation was stopped
     private long deltaStopTime = 0;  // Time difference when animation was resumed
+    static long timeoutTime = 60000000000L;
+    private boolean timeout=false;
 
     // Load images for target, agents, background, and found indicator
     private static Image targetImage = new Image(SimController.class.getResourceAsStream("/Image/Agent/target.png"));
     static Image agentImage = new Image(SimController.class.getResourceAsStream("/Image/Agent/human.png"));
     private Image backImage = new Image(SimController.class.getResourceAsStream("/Image/Background/back1.jpg"));
     private Image foundImage = new Image(SimController.class.getResourceAsStream("/Image/Background/complete.png"));
+    private Image timeoutImage = new Image(SimController.class.getResourceAsStream("/Image/Background/timeout.png"));
+    private Image deadImage = new Image(SimController.class.getResourceAsStream("/Image/Agent/dead.png"));
 
     private float agentVelocityDefault = 10.0f;
     private float agentDetectionRadiusDefault = 50.0f;
@@ -124,14 +128,25 @@ public class SimController {
             public void handle(long now) {
                 GraphicsContext gc = canvas.getGraphicsContext2D();
                 displayTime(calculTime(now - startNanoTime - deltaStopTime));
-                System.out.println(target.getFounded());
-                if (target.getFounded() >= numberOfFounded) {
+
+                if((now - startNanoTime - deltaStopTime)>=timeoutTime)
+                {
+                    gc.drawImage(backImage, 0, 0);
+                    gc.drawImage(timeoutImage, 200, 245);
+                    target.changeImage(deadImage);
+                    gc.drawImage(target.getImage(), target.getPositionX(), target.getPositionY());
+                    timeout();
+                }
+
+                else if (target.getFounded() >= numberOfFounded) {
                     gc.drawImage(backImage, 0, 0);
                     gc.drawImage(foundImage, 150, 200);
                     animationTimer.stop();
                     actualNumberOfFound = target.getFounded();
                     System.out.println("founded");
-                } else {
+                }
+                else
+                {
                     double t = (now - startNanoTime) / 1000000000.0;
 
                     gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -216,13 +231,19 @@ public class SimController {
         }
         isInitialized=true;
     }
+    /**
+     * Fonction when the time is too long
+     */
+    private void timeout()
+    {
+        timeout=true;
+        stopSim();
+    }
 
     /**
      * Starts the simulation.
      */
     protected void startSim() {
-
-
         System.out.println("start...");
         System.out.println(this.canvas);
         initializeAgent();
@@ -264,6 +285,8 @@ public class SimController {
      * Resets and restarts the simulation.
      */
     protected void resetSim() {
+        timeout=false;
+        target.changeImage(targetImage);
         stopSim();
         startSim();
     }
