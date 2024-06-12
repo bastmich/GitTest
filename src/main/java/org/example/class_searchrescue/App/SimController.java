@@ -171,6 +171,7 @@ public class SimController {
                                     if (Math.sqrt(Math.pow(agentPosition[0] - otherAgentPosition[0], 2) + Math.pow(agentPosition[1] - otherAgentPosition[1], 2)) <= Agent.imageSize) {
                                         //Rebound the agents
                                         agents.get(i).reverseAngle();
+                                        agents.get(j).reverseAngle();
                                     }
                                 }
                             }

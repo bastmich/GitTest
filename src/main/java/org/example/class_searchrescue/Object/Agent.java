@@ -424,7 +424,7 @@ public class Agent extends ObjectScheme {
      */
     public void reverseAngle()
     {
-        this.directionAngle = this.directionAngle+180+30;
+        this.directionAngle = this.directionAngle+180;
         if(this.directionAngle>=360)
         {
             this.directionAngle=this.directionAngle-360;
