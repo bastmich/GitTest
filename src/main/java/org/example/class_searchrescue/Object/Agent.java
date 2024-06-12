@@ -32,13 +32,16 @@ public class Agent extends ObjectScheme {
     }
 
     private State state;
-    private int imageSize = 100;
+    static public int imageSize = 100;
 
     private float maxWindowX;
     private float maxWindowY;
 
     private float directionAngle;
     private float incrementStep = 1;
+
+    private boolean rebounding=false;
+    private int reboundingDistance=0;
 
     /**
      * Constructs an Agent with the specified properties.
@@ -115,14 +118,6 @@ public class Agent extends ObjectScheme {
         return this.radiusCommunication;
     }
 
-    /**
-     * Gets the detection radius of the agent.
-     *
-     * @return the detection radius
-     */
-    public float getRadiusDetection() {
-        return this.radiusDetection;
-    }
 
     /**
      * Sets the detection radius of the agent.
@@ -145,10 +140,27 @@ public class Agent extends ObjectScheme {
     /**
      * Gets the velocity of the agent.
      *
-     * @return the current velocity
+     * @return the current velocity paramater
      */
-    public float getVelocity() {
-        return this.velocityMagnitude;
+    public float getVelocity(){
+       return this.velocityMagnitude;
+    }
+
+    /**
+     * Gets the bounding parameter of the agent.
+     *
+     * @return the current bounding paramater
+     */
+    public boolean getRebounding() {
+        return this.rebounding;
+    }
+
+    /**
+     * Sets the bounding parameter of the agent.
+     *
+     */
+    public void setRebounding(boolean rebounding) {
+        this.rebounding = rebounding;
     }
 
     /**
@@ -405,5 +417,31 @@ public class Agent extends ObjectScheme {
     public void setGoToPosition(float[] position) {
         this.goToPosition = position;
         this.state = State.GOTO;
+    }
+    /**
+     * Reverse the angle when the agent rebounding
+     *
+     */
+    public void reverseAngle()
+    {
+        this.directionAngle = this.directionAngle+180+30;
+        if(this.directionAngle>=360)
+        {
+            this.directionAngle=this.directionAngle-360;
+        }
+        this.reboundingDistance=0;
+        rebounding=true;
+    }
+    /**
+     *Increment the distance done by the agent during a rebounding
+     *
+     */
+    public void reboundingDistance()
+    {
+        this.reboundingDistance += (int) (this.velocityMagnitude*this.incrementStep);
+        if (this.reboundingDistance>=imageSize)
+        {
+            rebounding=false;
+        }
     }
 }

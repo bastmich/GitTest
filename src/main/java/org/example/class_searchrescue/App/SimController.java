@@ -160,6 +160,24 @@ public class SimController {
                         //Change the position of agent
                         float[] newPositions = agents.get(i).updatePosition(target);
                         agents.get(i).changePosition(newPositions[0], newPositions[1]);
+
+                        //Check for collision with other agents
+                        for (int j = 0; j < agents.size(); j++) {
+                            if (j!= i) {
+                                float[] agentPosition = agents.get(i).getPosition();
+                                float[] otherAgentPosition = agents.get(j).getPosition();
+                                //Check the distance for collision
+                                if(!agents.get(i).getRebounding()) {
+                                    if (Math.sqrt(Math.pow(agentPosition[0] - otherAgentPosition[0], 2) + Math.pow(agentPosition[1] - otherAgentPosition[1], 2)) <= Agent.imageSize) {
+                                        //Rebound the agents
+                                        agents.get(i).reverseAngle();
+                                    }
+                                }
+                            }
+                        }
+
+                        //Increment the distance made by the agent
+                        agents.get(i).reboundingDistance();
                         //Draw the agent at the new position
                         gc.drawImage(agents.get(i).getImage(), newPositions[0], newPositions[1]);
                         //Check if the agent can find the target
