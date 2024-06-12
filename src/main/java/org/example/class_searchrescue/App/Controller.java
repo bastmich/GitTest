@@ -72,6 +72,7 @@ public class Controller {
      */
     private void updateSlider(int newValue)
     {
+        //The slider can be moved only during the running time
         if(!running ||SimController.actualNumberOfFound== SimController.numberOfFounded)
         {
             slider.adjustValue(newValue);
@@ -88,7 +89,7 @@ public class Controller {
      */
     @FXML
     private void startSim(){
-
+        //Update the image of the agent
         if(SquareMan.isVisible())
         {
             SimController.agentImage =agentMan;
@@ -102,12 +103,14 @@ public class Controller {
             SimController.agentImage=agentHelicopter;
         }
 
+        //Start the sim if the sim not running
      if (!running && SimController.actualNumberOfFound<SimController.numberOfFounded) {
 
          Application.simController.startSim();
          updateConfigLabel();
          running = true;
      }
+     //Start the sim is the sim is paused
      else if(pause && SimController.actualNumberOfFound<SimController.numberOfFounded)
      {
          System.out.println(SimController.actualNumberOfFound);
@@ -117,6 +120,7 @@ public class Controller {
          pause = false;
          updateConfigLabel();
      }
+     //Reset the sim
      else if (SimController.actualNumberOfFound==SimController.numberOfFounded)
      {
          Application.simController.resetSim();
@@ -140,7 +144,7 @@ public class Controller {
      */
     @FXML
     private void resetSim(){
-
+        //Keep the selected agent image
         if(SquareMan.isVisible())
         {
             SimController.agentImage =agentMan;
@@ -174,7 +178,7 @@ public class Controller {
 
             // Check if the file exist
             if (!configFile.exists() || !configFile.isFile()) {
-                System.out.println("Ce fichier n'existe pas : " + selectedFile.getAbsolutePath());
+                System.out.println("The file doesn't exist : " + selectedFile.getAbsolutePath());
                 return;
             }
 
@@ -208,11 +212,11 @@ public class Controller {
 
 
             } catch (IOException e) {
-                System.out.println("Erreur lors de la lecture du fichier de configuration : " + e.getMessage());
+                System.out.println("Erro when trying to open the file : " + e.getMessage());
             }
 
         } else {
-            System.out.println("Aucun fichier sélectionné.");
+            System.out.println("No file selected.");
         }
     }
 

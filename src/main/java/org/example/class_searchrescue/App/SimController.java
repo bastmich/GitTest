@@ -1,7 +1,6 @@
 package org.example.class_searchrescue.App;
 
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -42,10 +41,12 @@ public class SimController {
     private Image timeoutImage = new Image(SimController.class.getResourceAsStream("/Image/Background/timeout.png"));
     private Image deadImage = new Image(SimController.class.getResourceAsStream("/Image/Agent/dead.png"));
 
+    //Default value of the agent
     private float agentVelocityDefault = 10.0f;
     private float agentDetectionRadiusDefault = 50.0f;
     private float agentCommunicationRadiusDefault = 100.0f;
 
+    //Value of the agent
     static float agentVelocityConfig;
     static float agentDetectionRadiusConfig;
     static float agentCommunicationRadiusConfig;
@@ -97,15 +98,12 @@ public class SimController {
         System.out.println("Initialize agents ...");
         if (isInitialized)
         {
-            System.out.println("config");
             for (int i = 0; i < numberOfAgents; i++) {
                 agents.add(new Agent(agentDetectionRadiusConfig, agentCommunicationRadiusConfig, agentVelocityConfig, agentImage, (float) this.canvas.getWidth(), (float) this.canvas.getHeight()));
             }
         }
         else
         {
-            System.out.println("default");
-            System.out.println(numberOfAgents);
             for (int i = 0; i < numberOfAgents; i++) {
                 System.out.println("+1");
                 System.out.println(canvas);
@@ -127,17 +125,20 @@ public class SimController {
             @Override
             public void handle(long now) {
                 GraphicsContext gc = canvas.getGraphicsContext2D();
+                //Function to display the time on the UI
                 displayTime(calculTime(now - startNanoTime - deltaStopTime));
 
+                //Check if the max time is exceeded
                 if((now - startNanoTime - deltaStopTime)>=timeoutTime)
                 {
+                    //Draw final image for timeout
                     gc.drawImage(backImage, 0, 0);
                     gc.drawImage(timeoutImage, 200, 245);
                     target.changeImage(deadImage);
                     gc.drawImage(target.getImage(), target.getPositionX(), target.getPositionY());
                     timeout();
                 }
-
+                //Check if the target is founded by all the needed agents
                 else if (target.getFounded() >= numberOfFounded) {
                     gc.drawImage(backImage, 0, 0);
                     gc.drawImage(foundImage, 150, 200);
@@ -148,21 +149,24 @@ public class SimController {
                 else
                 {
                     double t = (now - startNanoTime) / 1000000000.0;
-
+                    //Draw the back image
                     gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
                     gc.drawImage(backImage, 0, 0);
                     gc.drawImage(target.getImage(), target.getPositionX(), target.getPositionY());
 
                     for (int i = 0; i < agents.size(); i++) {
+                        //Update the number of found
                         actualNumberOfFound = target.getFounded();
+                        //Change the position of agent
                         float[] newPositions = agents.get(i).updatePosition(target);
                         agents.get(i).changePosition(newPositions[0], newPositions[1]);
+                        //Draw the agent at the new position
                         gc.drawImage(agents.get(i).getImage(), newPositions[0], newPositions[1]);
-
+                        //Check if the agent can find the target
                         if (agents.get(i).checkTarget(target)) {
                             target.newFounded();
                         }
-
+                        //Check if the agent can communicate with other agents
                         ArrayList<Agent> agentToCommunicate = new ArrayList<>();
                         for (int j = 0; j < agents.size(); j++) {
                             if (j != i) {
@@ -215,7 +219,7 @@ public class SimController {
         System.out.println("Number of found : " + numberOfFounded);
     }
     /**
-     * Updates the variable of the configuration files
+     * Updates the variable of the agent ith the variable of the configuration files
      */
     public void updateCongigFile(float velocity,float communicationRadius, float detectionRadius, float targetX, float targetY)
     {
@@ -232,7 +236,7 @@ public class SimController {
         isInitialized=true;
     }
     /**
-     * Fonction when the time is too long
+     * Fonction to stop when the time is too long
      */
     private void timeout()
     {
@@ -244,16 +248,19 @@ public class SimController {
      * Starts the simulation.
      */
     protected void startSim() {
-        System.out.println("start...");
-        System.out.println(this.canvas);
+        System.out.println("Start the simulation...");
+        //Initialize element
         initializeAgent();
         initializeAnimationTimer();
+        //Reset the time
         deltaStopTime = 0;
         stopTime = 0;
+        //Update and reset number of found
         updateNumberOfFound();
         target.resetFounded();
+        //Change the target image to the default image
         target.changeImage(targetImage);
-        System.out.println(animationTimer);
+        //Check if the animation timer is correctly initialized
         if (animationTimer != null) {
             System.out.println("Simulation started");
             animationTimer.start();
@@ -264,7 +271,9 @@ public class SimController {
      * Restarts the simulation from the last stopped time.
      */
     protected void restartSim() {
+        //Update number of found
         updateNumberOfFound();
+        //Calculate the time during the stop period
         deltaStopTime = System.nanoTime() - stopTime;
         if (animationTimer != null) {
             animationTimer.start();
@@ -286,7 +295,6 @@ public class SimController {
      */
     protected void resetSim() {
         timeout=false;
-        target.changeImage(targetImage);
         stopSim();
         startSim();
     }
